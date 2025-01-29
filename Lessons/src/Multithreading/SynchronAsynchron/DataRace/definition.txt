@@ -1,0 +1,82 @@
+Was ist ein Data Race?
+
+Ein Data Race (Datenrennen) tritt in einem Multithreading-Umfeld auf, wenn:
+	1.	Zwei oder mehr Threads gleichzeitig auf dieselbe Speicherstelle (z. B. eine Variable) zugreifen,
+	    mindestens einer dieser Zugriffe eine Schreiboperation ist.
+	2.	Es keine Synchronisationsmechanismen gibt, die den gleichzeitigen Zugriff verhindern.
+
+Warum tritt ein Data Race auf?
+
+In Multithreading-Umgebungen führen Threads oft parallele Operationen aus. Wenn ein Thread eine Variable liest oder schreibt,
+während ein anderer diese Variable ändert, können unerwartete und inkonsistente Zustände entstehen.
+
+Beispiel für ein Data Race
+
+class DataRaceExample {
+    static int counter = 0;
+
+    public static void main(String[] args) {
+        Runnable incrementTask = () -> {
+            for (int i = 0; i < 1000; i++) {
+                counter++;
+            }
+        };
+
+        Thread thread1 = new Thread(incrementTask);
+        Thread thread2 = new Thread(incrementTask);
+
+        thread1.start();
+        thread2.start();
+
+        try {
+            thread1.join();
+            thread2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Counter: " + counter); // Erwartet: 2000, Tatsächlich: Unvorhersehbar
+    }
+}
+
+Erklärung des Problems:
+	•	counter++ besteht aus drei Schritten: Lesen, Erhöhen, Schreiben.
+	•	Wenn zwei Threads gleichzeitig diesen Vorgang ausführen, können sie denselben Wert lesen, bevor einer der Threads ihn schreibt. Dadurch gehen Änderungen verloren.
+
+Wie kann man ein Data Race vermeiden?
+	1.	Synchronisierung verwenden:
+Nutze synchronized, um sicherzustellen, dass nur ein Thread gleichzeitig auf die kritische Ressource zugreift.
+
+public synchronized void increment() {
+    counter++;
+}
+
+
+	2.	Lock-Mechanismen verwenden:
+Die Klasse ReentrantLock bietet flexiblere Synchronisationsmöglichkeiten.
+
+private final Lock lock = new ReentrantLock();
+
+public void increment() {
+    lock.lock();
+    try {
+        counter++;
+    } finally {
+        lock.unlock();
+    }
+}
+
+
+	3.	Atomare Klassen nutzen:
+Die Klassen im java.util.concurrent.atomic-Paket (z. B. AtomicInteger) garantieren atomare Operationen und verhindern Data Races.
+
+private static AtomicInteger counter = new AtomicInteger(0);
+
+public void increment() {
+    counter.incrementAndGet();
+}
+
+Zusammenfassung
+	•	Ein Data Race tritt auf, wenn Threads unkoordiniert auf eine gemeinsam genutzte Variable zugreifen.
+	•	Es führt zu inkonsistenten und unvorhersehbaren Ergebnissen.
+	•	Vermeiden kannst du es durch Synchronisation (synchronized), Lock-Mechanismen oder atomare Klassen (AtomicInteger).

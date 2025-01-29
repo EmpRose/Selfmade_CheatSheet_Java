@@ -1,0 +1,29 @@
+Wait und Notify in Java - Kurz und Knackig
+
+wait() und notify() sind Methoden der Klasse Object, die in Java zur Thread-Kommunikation verwendet werden.
+Sie ermöglichen es Threads, innerhalb eines Monitors (synchronisierten Blocks oder Methode) zu pausieren und wieder aufgeweckt zu werden.
+
+Wichtige Punkte
+	1.	wait()
+	•	Versetzt den aktuellen Thread in einen wartenden Zustand, bis ein anderer Thread ihn mit notify() oder notifyAll() aufweckt.
+	•	Der Thread gibt dabei den Monitor (Lock) frei.
+	2.	notify()
+	•	Weckt einen wartenden Thread auf, der zuvor wait() aufgerufen hat. Der Monitor wird erst nach Verlassen des synchronisierten Blocks freigegeben.
+	3.	notifyAll()
+	•	Weckt alle wartenden Threads auf. Diese treten dann nacheinander in den Monitor ein, wenn er verfügbar ist.
+
+Wichtigste Voraussetzungen
+	•	Synchronisierte Blöcke:
+wait() und notify() können nur in einem synchronisierten Block oder einer synchronisierten Methode aufgerufen werden.
+	•	Monitor des Objekts:
+Der aufrufende Thread muss den Monitor des Objekts besitzen, dessen wait() oder notify() er aufruft.
+
+Anwendungsfall
+
+Verwendet bei Szenarien wie Producer-Consumer, bei denen Threads koordiniert auf eine gemeinsam genutzte Ressource zugreifen müssen.
+
+Zusammenfassung
+	•	wait(): Thread pausiert und gibt den Lock frei.
+	•	notify(): Weckt einen wartenden Thread.
+	•	notifyAll(): Weckt alle wartenden Threads.
+	•	Muss in synchronisierten Blöcken/Methoden verwendet werden.

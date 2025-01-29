@@ -1,0 +1,125 @@
+Generics in Java ermöglichen es, Klassen, Schnittstellen und Methoden mit Typ-Parametern zu definieren.
+Sie erhöhen die Typensicherheit und vermeiden Casts, indem sie den Datentyp zur Compilezeit festlegen.
+Generics verbessern den Code, indem sie Wiederverwendbarkeit und Lesbarkeit fördern.
+
+Vorteile:
+	•	Typensicherheit: Verhindert ClassCastException zur Laufzeit.
+	•	Wiederverwendbarkeit: Eine Klasse oder Methode kann für verschiedene Datentypen verwendet werden.
+	•	Lesbarkeit: Der Code ist klarer und verständlicher.
+
+Beispiel:
+
+List<String> list = new ArrayList<>(); // Nur Strings erlaubt
+list.add("Hello");
+// list.add(10); // Compile-Fehler
+
+Beispiel: Generische Methode und Klasse:
+
+// Generische Klasse mit dem Typ-Parameter T
+class Box<T> {
+    private T value;
+
+    // Setter-Methode
+    public void setValue(T value) {
+        this.value = value;
+    }
+
+    // Getter-Methode
+    public T getValue() {
+        return value;
+    }
+}
+
+// Generische Methode
+public class GenericsExample {
+
+    // Methode, die zwei Werte des gleichen Typs vergleicht
+    public static <T extends Comparable<T>> T getMax(T value1, T value2) {
+        if (value1.compareTo(value2) > 0) {
+            return value1;
+        } else {
+            return value2;
+        }
+    }
+
+    public static void main(String[] args) {
+        // Nutzung der generischen Box-Klasse
+        Box<Integer> intBox = new Box<>();
+        intBox.setValue(10);
+        System.out.println("Box value: " + intBox.getValue());
+
+        Box<String> strBox = new Box<>();
+        strBox.setValue("Hello");
+        System.out.println("Box value: " + strBox.getValue());
+
+        // Nutzung der generischen Methode
+        Integer maxInt = getMax(5, 10);
+        System.out.println("Max Integer: " + maxInt);
+
+        String maxStr = getMax("Apple", "Banana");
+        System.out.println("Max String: " + maxStr);
+    }
+}
+
+Hier ist ein kleines Beispiel, das die Verwendung von Generics mit einer Klasse und einer Methode auf <T>-Basis zeigt:
+
+Beispiel: Generische Methode und Klasse
+
+// Generische Klasse mit dem Typ-Parameter T
+class Box<T> {
+    private T value;
+
+    // Setter-Methode
+    public void setValue(T value) {
+        this.value = value;
+    }
+
+    // Getter-Methode
+    public T getValue() {
+        return value;
+    }
+}
+
+// Generische Methode
+public class GenericsExample {
+
+    // Methode, die zwei Werte des gleichen Typs vergleicht
+    public static <T extends Comparable<T>> T getMax(T value1, T value2) {
+        if (value1.compareTo(value2) > 0) {
+            return value1;
+        } else {
+            return value2;
+        }
+    }
+
+    public static void main(String[] args) {
+        // Nutzung der generischen Box-Klasse
+        Box<Integer> intBox = new Box<>();
+        intBox.setValue(10);
+        System.out.println("Box value: " + intBox.getValue());
+
+        Box<String> strBox = new Box<>();
+        strBox.setValue("Hello");
+        System.out.println("Box value: " + strBox.getValue());
+
+        // Nutzung der generischen Methode
+        Integer maxInt = getMax(5, 10);
+        System.out.println("Max Integer: " + maxInt);
+
+        String maxStr = getMax("Apple", "Banana");
+        System.out.println("Max String: " + maxStr);
+    }
+}
+
+Erklärung:
+	1.	Generische Klasse (Box<T>):
+	•	Die Klasse Box<T> verwendet den Typ-Parameter T, sodass sie mit beliebigen Datentypen instanziiert werden kann.
+	•	setValue(T) und getValue() ermöglichen das Setzen und Abrufen eines Werts des generischen Typs T.
+	2.	Generische Methode (getMax):
+	•	Die Methode getMax<T> vergleicht zwei Werte des gleichen Typs T, der das Interface Comparable<T> implementiert.
+	•	Sie gibt den größeren Wert der beiden zurück.
+
+Vorteile:
+	•	Die Klasse Box<T> ist für verschiedene Datentypen wie Integer, String oder jede andere Klasse wiederverwendbar.
+	•	Die Methode getMax funktioniert mit allen Datentypen, die das Interface Comparable implementieren,
+	    wie z.B. Integer, String, Double etc.

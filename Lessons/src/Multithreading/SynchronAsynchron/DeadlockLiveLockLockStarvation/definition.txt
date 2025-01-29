@@ -1,0 +1,57 @@
+Deadlock, Livelock und Lock Starvation in Java – Kurz erklärt
+
+Diese Begriffe beschreiben Probleme, die beim Einsatz von Threads und Locks in paralleler Programmierung auftreten können.
+
+1. Deadlock (Verklemmung)
+
+Ein Deadlock tritt auf, wenn zwei oder mehr Threads auf Ressourcen warten, die von den jeweils anderen Threads gesperrt sind. Dadurch blockieren sich die Threads gegenseitig und kommen nicht mehr weiter.
+
+Ursache:
+	•	Threads halten verschiedene Locks und versuchen gleichzeitig, weitere Locks zu erwerben.
+
+Beispiel-Szenario:
+Thread A hält Lock 1 und wartet auf Lock 2, während Thread B Lock 2 hält und auf Lock 1 wartet.
+
+Vermeidung:
+	•	Reihenfolge der Lock-Akquisition einhalten.
+	•	Timeout-basierte Sperren verwenden (tryLock() von ReentrantLock).
+
+2. Livelock (Lebende Verklemmung)
+
+Ein Livelock entsteht, wenn Threads sich gegenseitig unendlich oft ausweichen oder Änderungen durchführen,
+um Konflikte zu vermeiden, aber dabei nie vorwärtskommen.
+Anders als bei einem Deadlock befinden sich die Threads in ständiger Bewegung, ohne jedoch die Arbeit zu erledigen.
+
+Ursache:
+	•	Threads reagieren ständig auf Aktionen anderer Threads, ohne ihre eigene Arbeit abzuschließen.
+
+Beispiel-Szenario:
+Zwei Threads geben Ressourcen immer wieder gegenseitig frei, um dem anderen den Zugriff zu ermöglichen,
+wodurch keiner die Ressourcen tatsächlich nutzt.
+
+Vermeidung:
+	•	Backoff-Strategien oder Randomisierung einführen, um die Wiederholung zu durchbrechen.
+
+3. Lock Starvation (Verhungern durch Sperren)
+
+Lock Starvation tritt auf, wenn ein Thread längere Zeit oder nie Zugriff auf eine benötigte Ressource erhält,
+weil andere Threads bevorzugt werden.
+
+Ursache:
+	•	Prioritätsbasierte Thread-Planung, bei der Threads mit höherer Priorität bevorzugt werden.
+	•	Threads in einer Warteschlange werden ständig von neu ankommenden Threads verdrängt.
+
+Beispiel-Szenario:
+Ein niedriger Prioritäts-Thread wartet unendlich lange auf eine Ressource, die von höher priorisierten Threads immer wieder verwendet wird.
+
+Vermeidung:
+	•	Faire Lock-Mechanismen nutzen (ReentrantLock mit fair=true).
+	•	Thread-Prioritäten vorsichtig und ausgeglichen setzen.
+
+Zusammenfassung
+	•	Deadlock: Threads blockieren sich gegenseitig und kommen nicht weiter.
+	•	Livelock: Threads reagieren ständig aufeinander, ohne Arbeit zu erledigen.
+	•	Lock Starvation: Ein Thread erhält keinen Zugriff auf die Ressource, da andere bevorzugt werden.
+
+Diese Probleme können durch sorgfältige Synchronisationsstrategien, den Einsatz moderner Concurrency-Tools und
+eine durchdachte Thread-Kommunikation vermieden werden.

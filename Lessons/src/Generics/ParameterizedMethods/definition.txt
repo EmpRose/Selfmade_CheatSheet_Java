@@ -1,0 +1,37 @@
+Parameterized Methods in Java sind Methoden, die mit generischen Typen arbeiten, um flexible und wiederverwendbare Funktionen zu erstellen.
+Der Typ wird beim Aufruf der Methode angegeben, ähnlich wie bei parametrisierten Klassen.
+Dadurch können Methoden mit unterschiedlichen Datentypen arbeiten, ohne den Code zu duplizieren.
+
+Beispiel:
+
+class Utility {
+    // Parametrisierte Methode mit generischem Typ T
+    public <T> void printArray(T[] array) {
+        for (T element : array) {
+            System.out.println(element);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Utility utility = new Utility();
+
+        // Verwendung mit Integer
+        Integer[] intArray = {1, 2, 3, 4};
+        utility.printArray(intArray);
+
+        // Verwendung mit String
+        String[] stringArray = {"apple", "banana", "cherry"};
+        utility.printArray(stringArray);
+    }
+}
+
+Erklärung:
+	•	Die Methode printArray(T[] array) ist parametrisiert und akzeptiert ein Array von beliebigem Typ T.
+	•	Der Typ T wird zur Laufzeit beim Aufruf der Methode spezifiziert.
+	•	In diesem Beispiel wird die Methode mit einem Integer-Array und einem String-Array aufgerufen.
+
+Vorteile:
+	•	Wiederverwendbarkeit: Eine einzige Methode kann mit verschiedenen Datentypen arbeiten.
+	•	Typensicherheit: Es wird zur Kompilierzeit sichergestellt, dass nur kompatible Typen verwendet werden.

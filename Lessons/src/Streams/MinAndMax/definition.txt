@@ -1,0 +1,24 @@
+min und max
+
+Die Methoden min und max werden verwendet, um das kleinste bzw. größte Element eines Streams zu ermitteln, basierend auf einem angegebenen Comparator.
+
+1. Eigenschaften von min
+	•	Findet das kleinste Element im Stream.
+	•	Erwartet einen Comparator, der die Vergleichslogik definiert.
+	•	Gibt ein Optional zurück, das das kleinste Element enthält oder leer ist, wenn der Stream keine Elemente hat.
+
+2. Eigenschaften von max
+	•	Findet das größte Element im Stream.
+	•	Funktioniert genauso wie min, jedoch wird das größte Element basierend auf dem Comparator gesucht.
+	•	Gibt ebenfalls ein Optional zurück.
+
+Wichtige Hinweise
+	•	Comparator: Du musst definieren, wie Elemente verglichen werden sollen (z. B. numerisch, lexikografisch, anhand eines Attributs).
+	•	Leere Streams: Wenn der Stream leer ist, gibt min bzw. max ein leeres Optional zurück.
+	•	Beide Methoden funktionieren auch auf parallelen Streams, die Ordnung wird durch den Comparator definiert.
+
+Wann verwendet man min und max?
+	•	Wenn du das Element mit dem niedrigsten oder höchsten Wert aus einer Menge von Daten extrahieren möchtest.
+	•	Beispiele:
+	•	Kleinster Preis in einer Produktliste.
+	•	Ältester oder jüngster Teilnehmer in einer Gruppe.

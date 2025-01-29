@@ -1,0 +1,56 @@
+LinkedList in Java
+
+Die LinkedList ist eine Klasse aus dem Paket java.util, die eine doppelt verkettete Liste implementiert.
+Sie eignet sich besonders für Szenarien, in denen häufiges Einfügen und Entfernen von Elementen notwendig ist.
+
+Eigenschaften:
+	•	Doppelt verkettete Liste: Elemente sind in einer Kette von Knoten gespeichert, wobei jeder Knoten auf seinen Vorgänger und Nachfolger verweist.
+	•	Flexibilität: Gute Leistung bei Einfüge- und Löschoperationen (O(1)), insbesondere an den Enden.
+	•	Iterative Zugriffe: Schlechtere Leistung (O(n)) im Vergleich zu ArrayList, wenn auf Elemente anhand von Indizes zugegriffen wird.
+
+Wichtige Methoden:
+	•	add(E e): Fügt ein Element am Ende hinzu.
+	•	addFirst(E e) / addLast(E e): Fügt ein Element am Anfang bzw. Ende hinzu.
+	•	remove(Object o) / remove(int index): Entfernt ein bestimmtes Element oder das Element an einem Index.
+	•	get(int index): Gibt das Element an einem bestimmten Index zurück.
+	•	getFirst() / getLast(): Gibt das erste bzw. letzte Element zurück.
+	•	size(): Gibt die Anzahl der Elemente zurück.
+
+Beispiel:
+
+import java.util.LinkedList;
+
+public class LinkedListExample {
+    public static void main(String[] args) {
+        LinkedList<String> list = new LinkedList<>();
+
+        // Elemente hinzufügen
+        list.add("Alpha");
+        list.add("Beta");
+        list.add("Gamma");
+
+        // Elemente ausgeben
+        System.out.println("LinkedList: " + list); // [Alpha, Beta, Gamma]
+
+        // Zugriff auf das erste und letzte Element
+        System.out.println("Erstes Element: " + list.getFirst()); // Alpha
+        System.out.println("Letztes Element: " + list.getLast()); // Gamma
+
+        // Einfügen am Anfang
+        list.addFirst("Start");
+        System.out.println("Nach addFirst: " + list); // [Start, Alpha, Beta, Gamma]
+
+        // Entfernen eines Elements
+        list.remove("Beta");
+        System.out.println("Nach dem Entfernen: " + list); // [Start, Alpha, Gamma]
+    }
+}
+
+Unterschiede zu ArrayList:
+	•	Speicherung: ArrayList nutzt ein Array, LinkedList eine doppelt verkettete Liste.
+	•	Performance:
+	•	Einfügen/Löschen in der Mitte: Schneller bei LinkedList.
+	•	Zugriff auf Elemente: Schneller bei ArrayList.
+	•	Speicheraufwand: LinkedList benötigt mehr Speicher, da zusätzlich Zeiger auf Vorgänger und Nachfolger gespeichert werden.
+
+Die Wahl zwischen ArrayList und LinkedList hängt von den Anforderungen (z. B. häufige Einfüge-/Entfernungsoperationen vs. häufige Zugriffe) ab.

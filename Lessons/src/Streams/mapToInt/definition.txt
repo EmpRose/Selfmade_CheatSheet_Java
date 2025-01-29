@@ -1,0 +1,22 @@
+mapToInt
+
+Die Methode mapToInt wird verwendet, um die Elemente eines Streams in int-Werte zu transformieren.
+Sie ist Teil der spezialisierten Streams (z. B. IntStream), die effizienter mit primitiven Datentypen arbeiten.
+
+Eigenschaften von mapToInt:
+	1.	Transformation:
+	•	Wandelt die Elemente eines Streams mithilfe einer Funktion (ToIntFunction) in int-Werte um.
+	•	Ideal für Berechnungen, bei denen die ursprüngliche Datenstruktur nicht benötigt wird.
+	2.	Rückgabewert:
+	•	Gibt einen IntStream zurück, der direkt Methoden für primitive Datentypen bereitstellt (z. B. sum(), average()).
+	3.	Effizienz:
+	•	Vermeidet Autoboxing von Wrapper-Objekten (wie Integer), was bei großen Datenmengen die Leistung verbessert.
+
+Wann wird mapToInt verwendet?
+	•	Wenn du numerische Berechnungen auf den Elementen eines Streams durchführen möchtest.
+	•	Beispiele:
+	•	Extrahieren eines numerischen Attributs (z. B. Alter, Preis, Bewertung).
+	•	Summieren, Durchschnitt berechnen oder andere statistische Auswertungen.
+
+Hinweis:
+	•	mapToInt ist speziell für den Umgang mit int gedacht. Für andere primitive Datentypen gibt es ähnliche Methoden wie mapToLong und mapToDouble.

@@ -1,0 +1,46 @@
+Java Character Streams und Byte Streams – Dokumentation
+
+In Java sind Streams ein zentrales Konzept zur Verarbeitung von Eingabe- und Ausgabedaten.
+Sie ermöglichen einen sequentiellen Zugriff auf Datenquellen wie Dateien, Netzwerkverbindungen oder Speicher.
+Dabei unterscheidet Java zwischen Character Streams und Byte Streams, die jeweils für unterschiedliche Arten von Daten konzipiert sind.
+
+Byte Streams
+
+Byte Streams werden zur Verarbeitung von binären Daten verwendet, wie z. B. Bilder, Audiodateien oder andere nicht-textuelle Inhalte.
+Sie arbeiten auf der niedrigsten Ebene und lesen oder schreiben Daten in Form von 8-Bit-Bytes.
+Byte Streams berücksichtigen keine Zeichencodierung und sind ideal für den Umgang mit rohen Daten.
+
+Ein wesentliches Merkmal von Byte Streams ist, dass sie die Daten exakt so verarbeiten, wie sie gespeichert oder empfangen werden,
+ohne jegliche Interpretation. Dies macht sie ideal für den Umgang mit Dateien, die spezielle Formate wie Bilder oder verschlüsselte Daten enthalten.
+
+Byte Streams sind besonders nützlich für Anwendungen, die mit Multimediadateien arbeiten, Datenpakete über Netzwerke senden oder Rohdateien speichern.
+Da Byte Streams keine Zeicheninterpretation vornehmen, sind sie effizient und direkt.
+
+Character Streams
+
+Character Streams sind für die Verarbeitung von Textdaten vorgesehen und arbeiten mit 16-Bit-Unicode-Zeichen,
+was die Unterstützung verschiedener Zeichencodierungen ermöglicht. Im Gegensatz zu Byte Streams bieten
+Character Streams automatische Codierungs- und Decodierungsfunktionen, wodurch sie sich ideal für die Arbeit mit textbasierten Daten eignen.
+
+Ein Vorteil von Character Streams besteht darin, dass sie Zeichencodierungen wie UTF-8 oder UTF-16 unterstützen,
+wodurch sie besonders für internationalisierte Anwendungen geeignet sind. Sie ermöglichen eine komfortable Verarbeitung
+von Textdateien und anderen Dokumenten, in denen Zeichen eine wesentliche Rolle spielen.
+
+Character Streams eignen sich besonders für Anwendungen, die mit Textdateien wie CSV, XML oder JSON arbeiten.
+Sie sind nützlich für die Entwicklung plattformunabhängiger Anwendungen, die verschiedene Zeichensätze unterstützen müssen.
+
+Unterschiede zwischen Byte Streams und Character Streams
+
+Byte Streams arbeiten auf Byte-Ebene und sind daher ideal für binäre Daten, während Character Streams auf Zeichenebene arbeiten
+und sich für Textdaten eignen. Byte Streams sind effizient für die Verarbeitung von Rohdaten, da sie die Daten unverändert speichern und übertragen,
+während Character Streams den zusätzlichen Vorteil der Zeichencodierung bieten.
+
+Byte Streams sollten verwendet werden, wenn es um die Verarbeitung von Multimediadaten oder Rohformaten geht,
+während Character Streams bevorzugt werden sollten, wenn Textdaten verarbeitet oder Benutzerinteraktionen mit Zeichenketten erforderlich sind.
+
+Zusammenfassung
+
+Byte Streams eignen sich für die Verarbeitung von binären Daten wie Bildern oder Audiodateien und arbeiten auf Byte-Ebene
+ohne Codierungsinteraktion. Character Streams hingegen sind für Textdaten optimiert, arbeiten mit Unicode-Zeichen und ermöglichen eine
+einfache Handhabung von Zeichensätzen. Die Wahl zwischen beiden hängt vom jeweiligen Anwendungsfall ab,
+wobei binäre Daten am besten mit Byte Streams und textbasierte Daten mit Character Streams verarbeitet werden.

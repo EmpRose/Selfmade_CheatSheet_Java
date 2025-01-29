@@ -1,0 +1,26 @@
+Iterable in Java:
+Das Interface Iterable stellt die Grundlage für die Iteration über eine Sammlung bereit.
+Es definiert die Methode iterator(), die einen Iterator zurückgibt, mit dem Elemente der Sammlung sequenziell durchlaufen werden können (z. B. in einer for-each-Schleife).
+
+public interface Iterable<T> {
+    Iterator<T> iterator();
+}
+
+Iterable -> Collection
+
+Collection in Java:
+Das Interface Collection erweitert Iterable und stellt grundlegende Methoden für das Arbeiten mit Gruppen von Objekten bereit,
+wie Hinzufügen (add), Entfernen (remove) oder Prüfen (contains). Es ist die Basis für spezifischere Sammlungen wie List, collection.Set und Queue.
+
+public interface Collection<E> extends Iterable<E> {
+    boolean add(E e);
+    boolean remove(Object o);
+    boolean contains(Object o);
+    int size();
+    // Weitere Methoden...
+}
+
+Iterable -> Collection -> List
+                       -> Queue
+                       -> collection.Set
+                       !-> Map (Wird auch als Collection betrachtet, erbt aber nicht von Collection)

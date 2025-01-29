@@ -1,0 +1,19 @@
+ArrayBlockingQueue ist eine threadsichere, begrenzte Warteschlange (FIFO – First-In-First-Out),
+die eine feste Kapazität hat und Elemente in einem Array speichert. Sie gehört zur java.util.concurrent-Bibliothek und
+unterstützt blockierende Operationen für Produzenten-Konsumenten-Szenarien.
+
+Wichtige Merkmale:
+	•	Begrenzte Kapazität: Die Größe wird beim Erstellen festgelegt und kann nicht dynamisch geändert werden.
+	•	FIFO-Prinzip: Elemente werden in der Reihenfolge entfernt, in der sie eingefügt wurden.
+	•	Thread-Sicherheit: Interne Sperren sorgen dafür, dass mehrere Threads sicher darauf zugreifen können.
+	•	Blockierende Operationen:
+	•	put() blockiert, wenn die Warteschlange voll ist.
+	•	take() blockiert, wenn die Warteschlange leer ist.
+	•	Nicht-blockierende Methoden wie offer() und poll() stehen ebenfalls zur Verfügung.
+
+Wann verwenden?
+	•	In Produzenten-Konsumenten-Szenarien, wo Threads Daten sicher teilen müssen.
+	•	Bei begrenztem Speicher, um eine Überlastung des Systems zu vermeiden.
+	•	Wenn eine feste Kapazität benötigt wird, um Ressourcen effizient zu verwalten.
+
+Nachteil: Kapazität ist nicht erweiterbar, daher weniger flexibel als andere warteschlangenbasierte Strukturen.

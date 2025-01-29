@@ -1,0 +1,148 @@
+
+Interface       Interface       Klassen
+Queue       ->  Deque       ->  LinkedList / ArrayDeque
+                Interface        Klasse
+            ->  AbstractQueue -> PriorityQueue
+
+Queue ist nicht für Aufgaben vorgesehen, bei dennen Elemente aus "der Mitte" entfernt werden oder ihr hinzugefügt.
+
+
+FIFO: First in First Out // Not synchronized
+
+Queue - ist eine Kollektion, die die Reihenfolge der Elemente speichert.
+Ein neues Element wird am Ende hinzugefügt und bei der Benutzung wird das erste Element angesprochen. (FIFO)
+
+# LinkedList
+implementiert nicht nur das Interface "List" sondern auch das Interface "Queue.Deque"
+
+.add(key) // .offer(key) Unterschied: Keine Exception, wenn die Warteschlange voll ist.
+.remove(key) // .remove() - FIFO: Erstes Element wird gelöscht.
+.poll(key) // remove() Unterschied: Keine Exception, wenn keine Elemente zum löschen vorhanden sind.
+.element() Gibt das erste/nächste Element in der Warteschlange zurück.
+.peek() // .element() Unterschied: Keine Excepzion, wenn die Warteschlange leer ist.
+
+
+
+PriorityQueue
+
+PriorityQueue ist eine speziale Art der Warteschlange, in der die natürliche Sortierung erfolgt oder die, die wir selbst
+mit Hilfe von Comparable/Comparator beschreiben.
+Dadurch wird das priorisierte Element zuerst angesprochen.
+pq Benötigt "Comparable" für die KEys, wenn es sich um eigene Klassen handelt. Alternative = Exception
+
+
+
+########## Queue
+
+In Java ist eine Queue eine Schnittstelle, die Teil des java.util-Pakets ist und eine FIFO-Datenstruktur (First In, First Out) repräsentiert.
+Elemente werden am Ende hinzugefügt und am Anfang entfernt. Es wird häufig für Warteschlangen-ähnliche Prozesse verwendet.
+
+Eigenschaften
+	1.	Reihenfolge der Elemente: Elemente werden in der Reihenfolge verarbeitet, in der sie hinzugefügt wurden.
+	2.	Nicht threadsicher: Muss für den gleichzeitigen Zugriff durch mehrere Threads synchronisiert werden
+	(ConcurrentLinkedQueue ist eine threadsichere Alternative).
+	3.	Hauptoperationen:
+	•	add() / offer(): Fügt ein Element hinzu.
+	•	remove() / poll(): Entfernt das erste Element.
+	•	element() / peek(): Gibt das erste Element zurück, ohne es zu entfernen.
+
+Implementierungen
+	1.	LinkedList: Eine doppelt verkettete Liste, die Queue implementiert.
+	2.	PriorityQueue: Eine sortierte Queue, bei der Elemente nach natürlicher Ordnung oder einem Comparator verarbeitet werden.
+	3.	ArrayDeque: Eine effiziente Queue, die als doppelseitige Warteschlange dient.
+
+Beispiel
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class Main {
+    public static void main(String[] args) {
+        Queue<String> queue = new LinkedList<>();
+        queue.add("Erstes");  // Hinzufügen eines Elements
+        queue.add("Zweites");
+        queue.add("Drittes");
+
+        System.out.println(queue.peek()); // Ausgabe: Erstes (ohne Entfernen)
+        System.out.println(queue.poll()); // Ausgabe: Erstes (mit Entfernen)
+        System.out.println(queue);        // Ausgabe: [Zweites, Drittes]
+    }
+}
+
+Anwendungsfälle
+	•	Verarbeitung von Aufgaben in der Reihenfolge ihres Eingangs (z. B. Druckwarteschlangen).
+	•	Implementierung von Algorithmen wie BFS (Breadth-First Search).
+	•	Verwaltung von Ereigniswarteschlangen.
+
+
+
+##### PriorityQueue
+
+Eine PriorityQueue in Java ist eine Implementierung der Queue-Schnittstelle, bei der die Elemente auf Basis ihrer Priorität sortiert werden.
+Im Gegensatz zu einer normalen Warteschlange (FIFO) wird bei der PriorityQueue das Element mit der höchsten Priorität
+(bzw. kleinsten Wert in der natürlichen Ordnung) zuerst entfernt.
+
+Eigenschaften der PriorityQueue
+	1.	Automatische Sortierung:
+	•	Standardmäßig basiert die Sortierung auf der natürlichen Ordnung der Elemente (Comparable).
+	•	Alternativ kann ein benutzerdefinierter Comparator verwendet werden.
+	2.	Kein garantiertes Reihenfolgeverhalten:
+	•	Die tatsächliche Reihenfolge der Elemente in der Warteschlange kann von der natürlichen Ordnung abweichen,
+	    jedoch bestimmt diese, welches Element als nächstes entfernt wird.
+	3.	Nicht threadsicher:
+	•	Für parallelen Zugriff sollte eine PriorityBlockingQueue verwendet werden.
+	4.	Keine null-Elemente:
+	•	PriorityQueue erlaubt keine null-Werte.
+
+Konstruktoren
+	1.	Standard-Konstruktor: Verwendet die natürliche Ordnung der Elemente.
+
+PriorityQueue<E> pq = new PriorityQueue<>();
+
+
+	2.	Mit Comparator: Ermöglicht die Definition einer benutzerdefinierten Sortierung.
+
+PriorityQueue<E> pq = new PriorityQueue<>(Comparator.reverseOrder());
+
+Wichtige Methoden
+	•	add() / offer(): Fügt ein Element gemäß der Priorität hinzu.
+	•	poll(): Entfernt und gibt das Element mit der höchsten Priorität zurück.
+	•	peek(): Gibt das Element mit der höchsten Priorität zurück, ohne es zu entfernen.
+
+Beispiel
+
+import java.util.PriorityQueue;
+
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        pq.add(10);
+        pq.add(5);
+        pq.add(20);
+
+        System.out.println(pq.peek()); // Ausgabe: 5 (kleinste Zahl, höchste Priorität)
+        System.out.println(pq.poll()); // Ausgabe: 5 (Entfernt 5)
+        System.out.println(pq);        // Ausgabe: [10, 20]
+    }
+}
+
+Mit Comparator
+
+import java.util.PriorityQueue;
+import java.util.Comparator;
+
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Comparator.reverseOrder());
+        pq.add(10);
+        pq.add(5);
+        pq.add(20);
+
+        System.out.println(pq.poll()); // Ausgabe: 20 (größte Zahl, höchste Priorität)
+    }
+}
+
+Anwendungsfälle
+	•	Implementierung von Algorithmen wie Dijkstra oder A*.
+	•	Verwaltung von Aufgaben nach Priorität (z. B. Scheduler).
+	•	Sortieren von Elementen während der Verarbeitung.

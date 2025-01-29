@@ -1,0 +1,58 @@
+Volatile in Java – Kurz erklärt
+
+Das Schlüsselwort volatile wird in Java verwendet, um sicherzustellen, dass der Wert einer Variablen immer direkt aus
+dem Hauptspeicher gelesen und dorthin geschrieben wird. Dies wird vor allem in Multithreading-Szenarien benötigt,
+um Probleme durch Thread-Caching oder Optimierungen durch den Compiler zu vermeiden.
+
+Wichtige Eigenschaften von volatile:
+	1.	Sichtbarkeit:
+Änderungen an einer volatile-Variable durch einen Thread sind sofort für andere Threads sichtbar.
+	2.	Keine Caching-Probleme:
+Threads speichern Variablen oft in CPU-Caches. volatile zwingt Threads, den Wert immer aus dem Hauptspeicher zu lesen und zu schreiben,
+wodurch Inkonsistenzen vermieden werden.
+	3.	Keine atomaren Operationen:
+volatile garantiert keine Atomarität. Das heißt, Operationen wie x++ (Lesen, Erhöhen, Schreiben) sind nicht sicher,
+da sie aus mehreren Schritten bestehen.
+	4.	Kein Locking:
+Anders als synchronized blockiert volatile keine Threads. Es ist daher leichter und schneller, aber nur für bestimmte Szenarien geeignet.
+
+Wann volatile verwenden?
+	•	Wenn eine Variable von mehreren Threads gelesen und geschrieben wird ohne komplexe Zustandsänderungen.
+	•	Für einfache Flags (z. B. ein boolean zum Stoppen eines Threads).
+	•	Für Variablen, deren Werte direkt zwischen Threads ausgetauscht werden sollen.
+
+Beispiel: Verwendung von volatile
+
+class VolatileExample {
+    private static volatile boolean flag = true;
+
+    public static void main(String[] args) {
+        Thread thread1 = new Thread(() -> {
+            while (flag) {
+                // Thread wartet auf Änderung
+            }
+            System.out.println("Thread 1 beendet.");
+        });
+
+        Thread thread2 = new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            flag = false; // Änderung an volatile-Variable
+            System.out.println("Flag geändert von Thread 2.");
+        });
+
+        thread1.start();
+        thread2.start();
+    }
+}
+
+Ausgabe:
+Nach etwa 2 Sekunden beendet sich thread1, da thread2 die volatile-Variable flag auf false gesetzt hat, und die Änderung sofort sichtbar wird.
+
+Wichtiger Hinweis
+
+Für komplexere Operationen oder konsistente Änderungen mehrerer Variablen solltest du Synchronisierung (synchronized)
+oder Klassen wie AtomicInteger verwenden, da volatile nur für Sichtbarkeit sorgt, nicht für Atomarität.

@@ -1,0 +1,54 @@
+ArrayList in Java
+Die ArrayList ist eine Implementierung der List-Schnittstelle im Java Collection Framework.
+Sie basiert auf einem dynamischen Array, das automatisch wächst oder schrumpft, wenn Elemente hinzugefügt oder entfernt werden.
+
+Eigenschaften:
+	•	Dynamisches Array: Automatische Größenanpassung.
+	•	Schneller Zugriff: Konstante Zeitkomplexität O(1) für das Abrufen von Elementen.
+	•	Langsames Einfügen/Löschen: Höhere Kosten O(n) bei Operationen, die die Größe ändern, insbesondere bei Verschiebungen.
+	•	Nicht synchronisiert: Nicht threadsicher, erfordert manuelle Synchronisierung bei parallelem Zugriff.
+
+    .size()         = Menge an Inhalten
+    .capacity()     = Menge an Platz
+
+
+Verbindung zwischen ArrayList und Object in Java
+
+In Java ist die ArrayList eine generische Klasse, die jedes Objekt (Object) speichern kann, da alle Klassen implizit von Object erben.
+Ohne Generics oder mit dem generischen Typ <Object> kann eine ArrayList Objekte beliebiger Typen aufnehmen.
+
+Eigenschaften der Verbindung:
+	1.	Speicherung beliebiger Objekte:
+	•	Eine ArrayList<Object> kann Instanzen jeder Klasse speichern.
+	•	Praktisch, wenn die Liste gemischte Typen enthalten soll (z. B. Strings, Integers).
+	2.	Casting erforderlich:
+	•	Beim Abrufen von Elementen aus einer nicht-typisierten ArrayList (ArrayList<Object>) muss explizit auf den gewünschten Typ gecastet werden.
+	3.	Typensicherheit:
+	•	Durch den Einsatz von Generics (<T>) können Typfehler zur Compilezeit erkannt werden, was bei einer ArrayList<Object> nicht möglich ist.
+
+Beispiel:
+
+import java.util.ArrayList;
+
+public class ArrayListObjectExample {
+    public static void main(String[] args) {
+        // ArrayList mit generischem Typ Object
+        ArrayList<Object> list = new ArrayList<>();
+        list.add("Hello");         // String
+        list.add(42);              // Integer
+        list.add(3.14);            // Double
+
+        // Zugriff auf Elemente (erfordert Casting)
+        String str = (String) list.get(0);
+        Integer num = (Integer) list.get(1);
+        Double pi = (Double) list.get(2);
+
+        System.out.println(str + ", " + num + ", " + pi);
+    }
+}
+
+Vorteile von Generics gegenüber Object:
+
+ArrayList<String> list = new ArrayList<>();
+list.add("Hello");        // Nur Strings erlaubt
+String str = list.get(0); // Kein Casting erforderlich

@@ -1,0 +1,100 @@
+In Java wird die Klasse AtomicInteger aus dem Paket java.util.concurrent.atomic verwendet, um atomare Operationen auf Ganzzahlen durchzuführen. Sie bietet eine threadsichere Möglichkeit, auf eine int-Variable zuzugreifen und diese zu manipulieren, ohne explizite Synchronisation oder Locks zu verwenden.
+
+Das Hauptmerkmal von AtomicInteger ist, dass alle Operationen atomar sind, d. h. sie werden vollständig durchgeführt, ohne dass andere Threads dazwischenfunken können. Dies macht sie besonders nützlich in Multithreading-Umgebungen, in denen mehrere Threads gleichzeitig auf dieselbe Variable zugreifen und diese ändern.
+
+Wichtige Methoden von AtomicInteger
+	1.	get() – Gibt den aktuellen Wert zurück.
+	2.	set(int newValue) – Setzt die Variable auf einen neuen Wert.
+	3.	getAndSet(int newValue) – Setzt den neuen Wert und gibt den alten zurück.
+	4.	incrementAndGet() – Erhöht den Wert um 1 und gibt den aktualisierten Wert zurück.
+	5.	getAndIncrement() – Erhöht den Wert um 1 und gibt den vorherigen Wert zurück.
+	6.	decrementAndGet() – Verringert den Wert um 1 und gibt den aktualisierten Wert zurück.
+	7.	getAndDecrement() – Verringert den Wert um 1 und gibt den vorherigen Wert zurück.
+	8.	addAndGet(int delta) – Addiert einen bestimmten Wert und gibt das Ergebnis zurück.
+	9.	getAndAdd(int delta) – Addiert einen bestimmten Wert und gibt den vorherigen Wert zurück.
+	10.	compareAndSet(int expectedValue, int newValue) – Vergleicht den aktuellen Wert mit expectedValue und setzt ihn auf newValue, wenn sie übereinstimmen. Diese Methode ist nützlich für optimistische Sperrmechanismen (CAS - Compare and Swap).
+
+Verwendung von AtomicInteger
+
+Ein einfaches Beispiel zeigt die threadsichere Inkrementierung eines Zählers:
+
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class AtomicIntegerExample {
+    private static AtomicInteger counter = new AtomicInteger(0);
+
+    public static void main(String[] args) {
+        Runnable task = () -> {
+            for (int i = 0; i < 5; i++) {
+                System.out.println(Thread.currentThread().getName() + " erhöht auf: " + counter.incrementAndGet());
+            }
+        };
+
+        Thread thread1 = new Thread(task);
+        Thread thread2 = new Thread(task);
+
+        thread1.start();
+        thread2.start();
+    }
+}
+
+Mögliche Ausgabe:
+
+Thread-0 erhöht auf: 1
+Thread-1 erhöht auf: 2
+Thread-0 erhöht auf: 3
+Thread-1 erhöht auf: 4
+Thread-0 erhöht auf: 5
+Thread-1 erhöht auf: 6
+
+In diesem Beispiel verwenden zwei Threads die Methode incrementAndGet(), um sicher den Zähler zu erhöhen, ohne dass Synchronisationsmechanismen wie synchronized erforderlich sind.
+
+Optimistische Sperrung mit compareAndSet()
+
+Die Methode compareAndSet(expectedValue, newValue) prüft, ob der aktuelle Wert dem erwarteten entspricht, und setzt ihn dann auf einen neuen Wert. Dies ist nützlich, um Race Conditions zu vermeiden.
+
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class CompareAndSetExample {
+    public static void main(String[] args) {
+        AtomicInteger atomicValue = new AtomicInteger(10);
+
+        boolean updated = atomicValue.compareAndSet(10, 20);  // Setzt auf 20, wenn der Wert 10 ist
+        System.out.println("Update erfolgreich? " + updated + ", neuer Wert: " + atomicValue.get());
+
+        updated = atomicValue.compareAndSet(10, 30);  // Erwartungswert ist nicht mehr 10, daher kein Update
+        System.out.println("Update erfolgreich? " + updated + ", neuer Wert: " + atomicValue.get());
+    }
+}
+
+Ausgabe:
+
+Update erfolgreich? true, neuer Wert: 20
+Update erfolgreich? false, neuer Wert: 20
+
+Einsatzgebiete von AtomicInteger
+	1.	Thread-sichere Zähler:
+	•	Perfekt für Aufgaben wie das Zählen von Anfragen oder Aufgaben in einem Multi-Threaded-System.
+	2.	Optimistische Sperrmechanismen:
+	•	Vermeidung von Locks durch CAS-Operationen.
+	3.	Parallele Berechnungen:
+	•	Sicherstellung, dass ein Wert nur einmal geändert wird.
+	4.	Flags und Statusverwaltung:
+	•	Setzen von Statuswerten ohne Synchronisation.
+
+Vorteile von AtomicInteger
+	•	Keine Notwendigkeit für synchronized: Verbessert die Performance, indem Locks vermieden werden.
+	•	Hohe Effizienz: Atomare Operationen nutzen spezielle CPU-Instruktionen, die schneller als traditionelle Synchronisation sind.
+	•	Geringe Speicher-Overheads: Keine zusätzlichen Strukturen wie bei synchronisierten Blöcken.
+
+Nachteile von AtomicInteger
+	•	Nur für einfache Operationen geeignet: Komplexere Operationen erfordern immer noch explizite Synchronisation.
+	•	Fehlende Gruppierung: Mehrere atomare Variablen können nicht in einer einzigen atomaren Aktion kombiniert werden.
+
+Zusammenfassung
+	•	AtomicInteger bietet eine threadsichere Alternative zu einer int-Variable ohne Verwendung von Locks.
+	•	Typische Operationen sind incrementAndGet(), decrementAndGet() und compareAndSet().
+	•	Es wird häufig verwendet für Zähler, Flags und statusbasierte Steuerungen in Multi-Threading-Umgebungen.
+	•	AtomicInteger basiert auf atomaren CPU-Operationen und ist effizienter als Synchronisation mit synchronized.
+
+Diese Klasse ist eine großartige Wahl, wenn es um einfache, aber thread-sichere Ganzzahloperationen geht.

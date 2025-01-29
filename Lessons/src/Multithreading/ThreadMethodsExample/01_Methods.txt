@@ -1,0 +1,14 @@
+Wichtige Thread-Methoden in Java:
+	•	start():                    Startet einen neuen Thread und führt dessen run()-Methode in einem separaten Thread aus.
+	•	run():                      Definiert die auszuführende Logik des Threads. Sollte direkt nicht aufgerufen werden.
+	•	sleep(long millis):         Pausiert den aktuellen Thread für die angegebene Zeit (Millisekunden).
+	•	join():                     Wartet blockierend, bis der aufgerufene Thread seine Ausführung beendet hat.
+	•	join(long millis):          Wartet für die angegebene Zeit auf die Fertigstellung eines Threads.
+	•	interrupt():                Signalisiert einem Thread, dass er unterbrochen werden soll.
+	•	isInterrupted():            Prüft, ob ein Thread unterbrochen wurde (ohne den Status zurückzusetzen).
+	•	getName():                  Gibt den Namen des Threads zurück.
+	•	setName(String name):       Setzt den Namen des Threads.
+	•	getId():                    Gibt die eindeutige ID des Threads zurück.
+	•	getPriority():              Gibt die Priorität des Threads zurück (Standard: Thread.NORM_PRIORITY).
+	•	setPriority(int priority):  Setzt die Priorität des Threads (Thread.MIN_PRIORITY bis Thread.MAX_PRIORITY).
+	•	currentThread():            Gibt eine Referenz auf den aktuell laufenden Thread zurück.

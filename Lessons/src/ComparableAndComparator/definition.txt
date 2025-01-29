@@ -1,0 +1,28 @@
+Comparable & Comparator sind Interfaces die zum "Vergleichen" und "Sortieren" eingesetzt und genutzt werden.
+
+Comparable: (Für die natürliche Reihenfolge)
+
+Interface Comparable in Java
+Das Comparable-Interface wird verwendet, um eine natürliche Reihenfolge für Objekte einer Klasse zu definieren.
+Es enthält die Methode compareTo(T o), die zwei Objekte vergleicht.
+	•	Rückgabe:
+	•	0 → Beide Objekte sind gleich.
+	•	< 0 → Das aktuelle Objekt ist kleiner.
+	•	> 0 → Das aktuelle Objekt ist größer.
+
+Wird oft mit Collections.sort() verwendet, um Objekte basierend auf der definierten Reihenfolge zu sortieren.
+
+Comparator: (Für die nicht natürliche Reihenfolge)
+
+Interface Comparator in Java
+Das Comparator-Interface ermöglicht die benutzerdefinierte Definition von Vergleichslogiken zwischen Objekten.
+Es enthält die Methode compare(T o1, T o2), um zwei Objekte zu vergleichen.
+	•	Rückgabe:
+	•	0 → Beide Objekte sind gleich.
+	•	< 0 → Das erste Objekt ist kleiner.
+	•	> 0 → Das erste Objekt ist größer.
+
+Vorteile:
+	•	Ermöglicht mehrere Vergleichslogiken (z. B. nach Name, Alter).
+	•	Wird oft mit Collections.sort() oder Streams verwendet.
+Ideal für dynamische Sortieranforderungen.

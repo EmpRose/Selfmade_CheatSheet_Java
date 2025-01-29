@@ -1,0 +1,43 @@
+Ein Lambda Supplier ist eine Lambda-Funktion, die das funktionale Interface Supplier<T> implementiert.
+Dieses Interface repräsentiert eine Funktion, die keinen Eingabewert akzeptiert, sondern einen Wert des Typs T zurückgibt.
+
+Syntax des Supplier<T>-Interfaces:
+
+@FunctionalInterface
+public interface Supplier<T> {
+    T get();
+}
+
+Eigenschaften:
+	•	Eingabe: Keine.
+	•	Ausgabe: Gibt einen Wert des Typs T zurück.
+	•	Verwendung: Wird verwendet, wenn Sie ein Ergebnis liefern möchten, ohne einen Eingabewert zu benötigen.
+
+Verwendung mit Lambda:
+
+Ein Lambda-Ausdruck, der einen Supplier<T> implementiert, könnte so aussehen:
+
+Supplier<String> stringSupplier = () -> "Hallo, Welt!";
+
+Hier liefert der Supplier einen String zurück.
+
+Anwendungsbeispiele:
+
+1. Einfacher Supplier:
+
+Supplier<Integer> randomSupplier = () -> (int) (Math.random() * 100);
+System.out.println(randomSupplier.get()); // Gibt eine zufällige Zahl zwischen 0 und 99 aus.
+
+2. Verwendung mit Streams:
+
+Supplier<List<String>> listSupplier = () -> Arrays.asList("Apfel", "Banane", "Kirsche");
+List<String> fruits = listSupplier.get();
+System.out.println(fruits); // Ausgabe: [Apfel, Banane, Kirsche]
+
+3. Verzögerte Initialisierung:
+
+Supplier<LocalDateTime> currentDateTimeSupplier = () -> LocalDateTime.now();
+System.out.println(currentDateTimeSupplier.get()); // Gibt die aktuelle Uhrzeit aus.
+
+Ein Lambda Supplier ist besonders nützlich, wenn ein Wert erst bei Bedarf bereitgestellt werden soll,
+beispielsweise für verzögerte Berechnung oder teure Initialisierungen.

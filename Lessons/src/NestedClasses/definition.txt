@@ -1,0 +1,41 @@
+Zusammenfassung :
+	•	Static Nested Classes:
+	•	Unabhängig von äußeren Instanzen, da sie mit static deklariert sind.
+	•	Können nur auf statische Mitglieder der äußeren Klasse zugreifen.
+	•	Werden typischerweise für Klassen verwendet, die logisch zur äußeren Klasse gehören, aber keine Instanz der äußeren Klasse benötigen.
+	•	Aufruf erfolgt über den Klassennamen: Outer.Nested nested = new Outer.Nested();.
+
+	•	Inner Classes:
+	•	Sind nicht-statisch und haben Zugriff auf alle Mitglieder (inklusive private) der äußeren Klasse.
+	•	Benötigen eine Instanz der äußeren Klasse, um erstellt zu werden: Outer.Inner inner = outerInstance.new Inner();.
+	•	Nützlich, wenn die innere Klasse stark mit einer Instanz der äußeren Klasse verknüpft ist.
+
+	•	Local Inner Classes:
+	•	Werden innerhalb einer Methode oder eines Blocks definiert.
+	•	Können nur innerhalb des Scopes der Methode oder des Blocks verwendet werden.
+	•	Haben Zugriff auf final oder effectively final Variablen der Methode.
+	•	Sinnvoll für Hilfsfunktionen, die nur in einer Methode benötigt werden.
+
+	•	Anonymous Classes:
+	•	Sind namenlos und werden direkt beim Erstellen definiert.
+	•	Implementieren eine Schnittstelle oder erweitern eine Klasse, um eine einzige Instanz davon bereitzustellen.
+	•	Haben Zugriff auf die Mitglieder der äußeren Klasse und final/effectively final Variablen des Scopes.
+	•	Häufig verwendet für kurze Implementierungen von Schnittstellen oder abstrakten Klassen (z. B. Runnable, Comparator).
+
+Hauptunterschiede:
+	1.	Zugriff auf äußere Klasse:
+	•	Static Nested: Kein Zugriff auf Instanzvariablen.
+	•	Inner Classes: Voller Zugriff auf Instanzvariablen der äußeren Klasse.
+	•	Local Inner und Anonymous: Zugriff auf final/effectively final Variablen des Scopes.
+
+	2.	Erstellungsweise:
+	•	Static Nested: Über den Klassennamen der äußeren Klasse (Outer.Nested).
+	•	Inner Classes: Über eine Instanz der äußeren Klasse.
+	•	Local Inner: Nur innerhalb der Methode, in der sie definiert sind.
+	•	Anonymous: Direkt beim Erstellen durch new.
+
+	3.	Verwendungszweck:
+	•	Static Nested: Für logisch zusammenhängende Klassen, ohne Abhängigkeit zur äußeren Klasse.
+	•	Inner Classes: Enge Kopplung mit einer Instanz der äußeren Klasse.
+	•	Local Inner: Kurzlebige Klassen, die in einer Methode bleiben sollen.
+	•	Anonymous: Einfache und einmalige Implementierungen von Schnittstellen/Klassen.

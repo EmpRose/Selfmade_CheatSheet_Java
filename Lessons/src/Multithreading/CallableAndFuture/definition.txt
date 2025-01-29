@@ -1,0 +1,28 @@
+In Java werden Callable und Future verwendet (Interfaces), um asynchrone Aufgaben effizient zu verwalten.
+Die Callable<T>-Schnittstelle ist eine Erweiterung von Runnable, mit dem Unterschied,
+dass sie einen Rückgabewert liefert und überprüfte Ausnahmen werfen kann.
+Sie wird typischerweise mit einem ExecutorService verwendet, um Aufgaben parallel auszuführen.
+
+Ein Callable-Objekt wird über die Methode call() definiert, die ein Ergebnis zurückliefert.
+Um ein solches Objekt auszuführen, wird es an einen ExecutorService übergeben,
+der die Aufgabe verarbeitet und ein Future<T>-Objekt zurückgibt.
+Mit Future kann der Status der Aufgabe überprüft oder das Ergebnis abgerufen werden, sobald es verfügbar ist.
+
+Das Future-Interface bietet Methoden wie get(), um das Ergebnis der Berechnung abzurufen. Diese Methode blockiert,
+bis das Ergebnis verfügbar ist. Mit get(timeout, unit) kann zudem ein Timeout gesetzt werden, um zu verhindern,
+dass das Programm unendlich wartet. Die Methode isDone() prüft, ob die Berechnung abgeschlossen ist,
+während cancel(mayInterruptIfRunning) die Ausführung der Aufgabe abbrechen kann.
+
+Ein typisches Muster der Verwendung von Callable und Future besteht darin,
+eine oder mehrere Aufgaben an einen ExecutorService zu übergeben und später die Ergebnisse über Future-Objekte abzurufen.
+Dies ist besonders nützlich, wenn mehrere Aufgaben parallel ausgeführt werden sollen, ohne dass der Hauptthread blockiert wird.
+
+Im Vergleich zu Runnable bietet Callable den Vorteil, dass ein Rückgabewert generiert werden kann und überprüfte Ausnahmen verarbeitet werden können.
+Runnable hingegen wird verwendet, wenn keine Rückgabe erforderlich ist und die Aufgabe lediglich nebenläufig ausgeführt werden soll.
+
+Zusätzlich zu Callable und Future gibt es erweiterte Konzepte wie den CompletionService,
+der Ergebnisse von Aufgaben in der Reihenfolge ihrer Fertigstellung liefert,
+und FutureTask, das sowohl als Runnable als auch als Future verwendet werden kann.
+
+Die Verwendung dieser Mechanismen ermöglicht es, nebenläufige Programmierung effizient umzusetzen,
+Ressourcen optimal zu nutzen und Aufgaben strukturiert zu verwalten.

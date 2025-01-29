@@ -1,0 +1,51 @@
+Vector in Java
+
+Ein Vector ist eine Klasse aus dem Paket java.util, die eine dynamisch wachsende Liste darstellt.
+Er ist ähnlich wie eine ArrayList, aber synchronisiert, was ihn für Multithreading-Umgebungen geeignet macht.
+
+Eigenschaften:
+	•	Dynamische Größe: Vergrößert sich automatisch, wenn mehr Speicher benötigt wird.
+	•	Synchronisiert: Geeignet für thread-sicheren Zugriff.
+	•	Unterstützt zufälligen Zugriff über Indizes, ähnlich wie Arrays.
+
+Wichtige Methoden:
+	•	add(E e): Fügt ein Element am Ende hinzu.
+	•	remove(Object o) / remove(int index): Entfernt ein bestimmtes Element oder das Element an einem Index.
+	•	get(int index): Gibt das Element an einem bestimmten Index zurück.
+	•	size(): Gibt die Anzahl der Elemente im Vector zurück.
+	•	isEmpty(): Prüft, ob der Vector leer ist.
+	•	contains(Object o): Überprüft, ob ein bestimmtes Element vorhanden ist.
+
+Beispiel:
+
+import java.util.Vector;
+
+public class VectorExample {
+    public static void main(String[] args) {
+        Vector<String> vector = new Vector<>();
+
+        // Elemente hinzufügen
+        vector.add("Alpha");
+        vector.add("Beta");
+        vector.add("Gamma");
+
+        // Elemente ausgeben
+        System.out.println("Vector: " + vector); // [Alpha, Beta, Gamma]
+
+        // Zugriff auf ein Element
+        System.out.println("Erstes Element: " + vector.get(0)); // Alpha
+
+        // Element entfernen
+        vector.remove("Beta");
+        System.out.println("Nach dem Entfernen: " + vector); // [Alpha, Gamma]
+
+        // Größe des Vectors
+        System.out.println("Größe: " + vector.size()); // 2
+    }
+}
+
+Unterschiede zu ArrayList:
+	•	Synchronisation: Vector ist synchronisiert, ArrayList nicht.
+	•	Standardwachstum: Vector verdoppelt seine Größe, wenn er voll ist, während ArrayList um 50% wächst.
+	•	Veraltet: Für moderne Anwendungen wird ArrayList bevorzugt, da Synchronisation meist durch externe Mechanismen
+	    (z. B. Collections.synchronizedList) erreicht wird.

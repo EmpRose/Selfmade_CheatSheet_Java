@@ -1,0 +1,35 @@
+Ein TreeSet in Java ist eine Implementierung der Set-Schnittstelle, die Elemente in aufsteigender sortierter Reihenfolge speichert.
+Es verwendet intern eine TreeMap, um die Elemente zu organisieren.
+Die Elemente in einem TreeSet müssen entweder das Interface Comparable implementieren oder einen benutzerdefinierten Comparator verwenden.
+
+Eigenschaften von TreeSet:
+	•	Eindeutige Elemente: Duplikate sind nicht erlaubt.
+	•	Sortierte Reihenfolge: Die Elemente werden in ihrer natürlichen Ordnung (oder gemäß einem Comparator) gespeichert.
+	•	Effiziente Operationen: Die Operationen add(), remove(), und contains() haben eine logarithmische Zeitkomplexität (O(log n)).
+	•	Keine null-Elemente: TreeSet erlaubt keine null-Werte, da diese nicht verglichen werden können.
+
+Beispiel:
+
+import java.util.TreeSet;
+
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> set = new TreeSet<>();
+        set.add(5);   // Hinzufügen eines Elements
+        set.add(2);
+        set.add(8);
+        set.add(5);   // Duplikat, wird ignoriert
+
+        System.out.println(set);        // Ausgabe: [2, 5, 8] (sortierte Reihenfolge)
+        System.out.println(set.first()); // Ausgabe: 2 (kleinstes Element)
+        System.out.println(set.last());  // Ausgabe: 8 (größtes Element)
+
+        set.remove(5);                  // Entfernt 5
+        System.out.println(set);        // Ausgabe: [2, 8]
+    }
+}
+
+Anwendungsfälle:
+	•	Sammlung eindeutiger Elemente mit automatischer Sortierung.
+	•	Verwendung in Szenarien, in denen ein schneller Zugriff auf die kleinsten oder größten Elemente erforderlich ist.
+	•	Implementierung von Navigationsoperationen wie headSet(), tailSet(), und subSet().

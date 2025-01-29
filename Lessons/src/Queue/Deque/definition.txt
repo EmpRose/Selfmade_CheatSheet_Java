@@ -1,0 +1,75 @@
+Deque (Double-Ended Queue)
+
+Ein Deque ist eine Schnittstelle in Java, die eine doppelseitige Warteschlange repräsentiert.
+Im Gegensatz zu einer normalen Queue ermöglicht ein Deque das Hinzufügen und Entfernen von Elementen an beiden Enden.
+Es ist flexibler und kann sowohl als Stack (LIFO) als auch als Queue (FIFO) verwendet werden.
+
+Hauptmerkmale von Deque
+	1.	Zwei Enden: Elemente können vorne und hinten hinzugefügt oder entfernt werden.
+	2.	Methoden zur Manipulation:
+	•	Queue-Operationen:
+	•	addLast() / offerLast() (Hinzufügen am Ende)
+	•	removeFirst() / pollFirst() (Entfernen vom Anfang)
+	•	peekFirst() (Element am Anfang ansehen)
+	•	Stack-Operationen:
+	•	push() (Hinzufügen am Anfang)
+	•	pop() (Entfernen vom Anfang)
+	3.	Keine null-Elemente: Deque erlaubt keine null-Werte.
+
+ArrayDeque
+
+Eine ArrayDeque ist eine Implementierung der Deque-Schnittstelle, die eine dynamische Array-basierte doppelseitige Warteschlange bereitstellt.
+Sie ist schneller und effizienter als andere Implementierungen wie LinkedList und wird häufig für Stapel- oder Warteschlangenoperationen verwendet.
+
+Eigenschaften von ArrayDeque
+	1.	Hohe Effizienz:
+	•	Im Vergleich zu LinkedList ist sie schneller bei Zugriffs- und Manipulationsoperationen.
+	2.	Dynamische Größe: Passt die Größe des internen Arrays automatisch an.
+	3.	Keine Größenbeschränkung: Im Gegensatz zu einer ArrayBlockingQueue.
+	4.	Nicht threadsicher: Bei parallelen Zugriffen sollte Collections.synchronizedDeque() verwendet werden.
+
+Beispiel für Deque
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+public class Main {
+    public static void main(String[] args) {
+        Deque<String> deque = new ArrayDeque<>();
+
+        // Elemente am Ende hinzufügen
+        deque.addLast("A");
+        deque.addLast("B");
+
+        // Elemente am Anfang hinzufügen
+        deque.addFirst("C");
+
+        System.out.println(deque); // Ausgabe: [C, A, B]
+
+        // Elemente entfernen
+        System.out.println(deque.pollFirst()); // Ausgabe: C (Entfernt vom Anfang)
+        System.out.println(deque.pollLast());  // Ausgabe: B (Entfernt vom Ende)
+    }
+}
+
+Beispiel als Stack (LIFO)
+
+import java.util.ArrayDeque;
+
+public class Main {
+    public static void main(String[] args) {
+        ArrayDeque<Integer> stack = new ArrayDeque<>();
+
+        // Elemente als Stack hinzufügen
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
+
+        System.out.println(stack.pop()); // Ausgabe: 30 (Entfernt als letztes hinzugefügtes Element)
+        System.out.println(stack);      // Ausgabe: [20, 10]
+    }
+}
+
+Anwendungsfälle
+	•	Deque: Geeignet für Szenarien, in denen sowohl FIFO als auch LIFO-Operationen benötigt werden.
+	•	ArrayDeque: Ideal für Stacks, Warteschlangen oder doppelseitige Warteschlangen mit effizientem Zugriff und Manipulation.

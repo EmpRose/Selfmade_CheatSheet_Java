@@ -1,0 +1,46 @@
+Lock und ReentrantLock in Java – Kurz erklärt
+
+In Java bieten die Klassen und Interfaces aus dem java.util.concurrent.locks-Paket
+fortgeschrittene Steuerungsmöglichkeiten für die Synchronisation von Threads. Lock und ReentrantLock
+sind die häufigsten Alternativen zur Verwendung des synchronized-Schlüsselworts.
+
+1. Lock (Interface)
+
+Das Lock-Interface bietet eine flexiblere und erweiterte Steuerung von Sperren im Vergleich zu synchronized.
+Es definiert Methoden, um explizit einen Lock zu erwerben oder freizugeben.
+
+Wichtige Methoden:
+	•	lock(): Der aktuelle Thread versucht, den Lock zu erwerben. Falls der Lock bereits belegt ist, blockiert der Thread.
+	•	unlock(): Gibt den Lock frei, der zuvor vom aktuellen Thread erworben wurde.
+	•	tryLock(): Versucht, den Lock zu erwerben, ohne zu blockieren. Gibt einen Boolean zurück, der den Erfolg anzeigt.
+	•	tryLock(long time, TimeUnit unit): Versucht, den Lock innerhalb eines angegebenen Zeitraums zu erwerben.
+	•	lockInterruptibly(): Ermöglicht das Unterbrechen eines Threads, der versucht, einen Lock zu erwerben.
+
+2. ReentrantLock (Implementierung von Lock)
+
+ReentrantLock ist eine Implementierung des Lock-Interfaces und bietet zusätzliche Funktionen gegenüber dem synchronized-Schlüsselwort.
+Es ermöglicht einem Thread, denselben Lock mehrfach zu erwerben, ohne in einen Deadlock zu geraten (daher “reentrant”).
+
+Wichtige Eigenschaften:
+	1.	Reentrancy:
+	•	Ein Thread kann einen Lock mehrfach erwerben, wenn er ihn bereits hält.
+	•	Der Lock muss jedoch entsprechend oft freigegeben werden (einmal pro Erwerb).
+	2.	Faire Sperren (Fair Lock):
+	•	Bei der Konstruktion eines ReentrantLock kann festgelegt werden, ob die Warteschlange der Threads fair
+	    (First-Come-First-Serve) behandelt wird.
+	•	Standardmäßig ist der Lock unfair.
+	3.	Zusätzliche Kontrolle:
+	•	ReentrantLock bietet detaillierte Kontrolle, z. B. über tryLock() oder Interrupt-Handling mit lockInterruptibly().
+
+Vorteile gegenüber synchronized:
+	•	Zeitgesteuerte Sperren: Ermöglicht das Warten auf eine Sperre für eine bestimmte Zeit (tryLock mit Timeout).
+	•	Unterbrechbarkeit: Threads können unterbrochen werden, während sie auf einen Lock warten (lockInterruptibly).
+	•	Bessere Debugging-Optionen: Methoden wie isLocked() oder getHoldCount() helfen beim Debugging.
+	•	Fairness: Kann Fairness bei der Lock-Zuweisung garantieren.
+
+Zusammenfassung:
+	•	Lock: Ein Interface für erweiterte und explizite Thread-Synchronisation.
+	•	ReentrantLock: Eine flexible, wiederverwendbare Implementierung von Lock, die zusätzliche Steuerungsmöglichkeiten wie Reentrancy,
+	    Fairness und Interrupt-Handling bietet.
+	•	Vergleich zu synchronized: ReentrantLock bietet mehr Flexibilität, erfordert jedoch manuelle Steuerung
+	    (lock() und unlock() müssen immer paarweise verwendet werden).

@@ -1,0 +1,59 @@
+Daemon Thread in Java
+
+Ein Daemon-Thread ist ein spezieller Thread, der im Hintergrund arbeitet, um Aufgaben auszuführen,
+die den primären, nicht-daemonisierten Threads (User-Threads) dienen. Sobald alle User-Threads eines Programms beendet sind, wird die JVM beendet, selbst wenn noch Daemon-Threads laufen.
+
+Wichtige Eigenschaften:
+	1.	Lebensdauer abhängig von User-Threads:
+Daemon-Threads existieren nur, solange mindestens ein User-Thread aktiv ist. Wenn alle User-Threads beendet sind,
+werden die Daemon-Threads automatisch beendet.
+	2.	Typische Anwendungen:
+	•	Hintergrundaufgaben wie Garbage Collection.
+	•	Periodisches Logging oder Wartungsaufgaben.
+	•	Server-Anwendungen für Verbindungen.
+	3.	Setzen eines Threads als Daemon:
+Mithilfe der Methode setDaemon(true) kann ein Thread vor dem Start als Daemon-Thread markiert werden.
+	4.	Status eines Threads überprüfen:
+Mit isDaemon() lässt sich überprüfen, ob ein Thread ein Daemon-Thread ist.
+	5.	Wichtiger Hinweis:
+Daemon-Threads sollten keine kritischen Aufgaben ausführen, da sie abrupt beendet werden können, wenn die JVM endet.
+
+Beispiel:
+
+Hier ein einfaches Beispiel, das die Funktionsweise eines Daemon-Threads zeigt:
+
+public class DaemonThreadExample {
+    public static void main(String[] args) {
+        Thread daemonThread = new Thread(() -> {
+            while (true) {
+                System.out.println("Daemon thread running...");
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        daemonThread.setDaemon(true); // Als Daemon markieren
+        daemonThread.start();
+
+        System.out.println("Main thread sleeping...");
+        try {
+            Thread.sleep(2000); // Hauptthread schläft für 2 Sekunden
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Main thread ends.");
+        // JVM beendet, Daemon-Thread wird gestoppt
+    }
+}
+
+Ausgabe:
+	•	Solange der Hauptthread läuft, gibt der Daemon-Thread “Daemon thread running…” aus.
+	•	Sobald der Hauptthread endet, wird der Daemon-Thread ebenfalls beendet, selbst wenn er noch nicht fertig ist.
+
+Zusammenfassung:
+
+Ein Daemon-Thread ist ein hilfreicher Hintergrund-Thread, der automatisch beendet wird, wenn keine User-Threads mehr laufen.
+Es ist ideal für sekundäre Aufgaben, die nicht kritisch für die Programmausführung sind.

@@ -1,0 +1,19 @@
+Interface   Klasse      Klasse
+Set     ->  HashSet ->  LinkedHashSet
+        Interface       Interface       Klasse
+        -> SortedSet -> NavigableSet -> TreeSet
+
+
+
+#collection.Set - ist eine Kollektion, die nur "unique" Elemente beinhaltet.
+
+Hinweis:
+@Override "equals"
+
+Wenn:
+stA == stB = true
+Dann:
+stA toCompare stB = 0
+
+Lösung:
+@Override equals , hashcode -> beide auf einen Wert, zum Beispiel: course (siehe TreeSetExample2)

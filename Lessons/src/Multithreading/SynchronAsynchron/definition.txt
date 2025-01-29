@@ -1,0 +1,31 @@
+Parallelism schlägt Concurrency nicht aus, sondern erweitert es durch weitere CPU Kerne oder Prozessoren.
+Essen und Singen = geht nicht zur gleichen Zeit, der Mund ist ein CPU Kern
+Kochen und Telefonieren = geht zur gleichen Zeit, es werden mehrere CPUs genutzt (Hände, Mund)
+
+Concurrency (Nebenläufigkeit): Mehrere Aufgaben, gleichzeitig, abwechselnd.
+	•	Definition: Mehrere Aufgaben werden zeitgleich gestartet, müssen aber nicht gleichzeitig laufen.
+	•	Ziel: Die effiziente Nutzung von Ressourcen durch Zeitscheiben oder Task-Switching.
+	•	Beispiel: Eine einzelne CPU bearbeitet mehrere Threads durch schnelles Umschalten (Multitasking). (Contextswitching)
+	•	Hardware: Kann auch auf einer einzelnen CPU funktionieren.
+
+Parallelism (Parallelität): 2 und mehr Aufgaben, zur selben Zeit.
+	•	Definition: Mehrere Aufgaben laufen tatsächlich gleichzeitig auf verschiedenen Prozessoren oder Threads.
+	•	Ziel: Beschleunigung durch gleichzeitige Ausführung auf mehreren Kernen.
+	•	Beispiel: Mehrere CPU-Kerne führen verschiedene Threads oder Prozesse gleichzeitig aus.
+	•	Hardware: Erfordert mehrere Prozessoren oder CPU-Kerne.
+
+Gegenüberstellung: Synchron vs. Asynchron
+
+Synchron: Mehrere Aufgaben, die abwechselnd , nacheinander ausgeführt werden.
+          (Wäsche anschmeißen, Wäsche rausnehmen, Wasserkocher einschalten, Tee eingießen, Schnitte belegen, Essen)
+	•	Definition: Aufgaben werden nacheinander ausgeführt. Eine Aufgabe blockiert, bis sie vollständig abgeschlossen ist.
+	•	Ziel: Einfache Kontrolle über den Ablauf, da jede Aufgabe auf das Ergebnis der vorherigen wartet.
+	•	Beispiel: Ein Programm liest eine Datei, und der nächste Schritt beginnt erst, wenn das Lesen abgeschlossen ist.
+	•	Nachteil: Kann Ressourcen blockieren und ineffizient sein, wenn auf externe Operationen (z. B. I/O) gewartet wird.
+
+Asynchron: Mehrere Aufgaben, die abwechselnd , nebeneinander ausgeführt werden.
+           (Wäsche anschmeisen,Wasserkocher einschalten, Schnitte belegen, Essen, Tee eingießen, Wäsche rausnehmen.)
+	•	Definition: Aufgaben werden parallel zur Hauptausführung gestartet, und der Hauptprozess wird nicht blockiert.
+	•	Ziel: Höhere Effizienz durch parallele Bearbeitung und keine Blockierung des Hauptprogramms.
+	•	Beispiel: Ein Programm startet das Laden einer Datei und führt gleichzeitig andere Aufgaben aus, bis das Laden abgeschlossen ist.
+	•	Nachteil: Erhöhte Komplexität durch das Management von Rückrufen, Versprechen oder Futures.

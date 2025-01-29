@@ -1,0 +1,70 @@
+## HashSet
+
+Ein HashSet in Java ist eine Implementierung der Set-Schnittstelle, die eine ungeordnete Sammlung eindeutiger Elemente bietet.
+Es verwendet eine HashMap intern, um die Elemente zu speichern, und sorgt dafür, dass keine Duplikate erlaubt sind.
+
+Eigenschaften von HashSet:
+	•	Einzigartige Elemente: Keine Duplikate sind erlaubt.
+	•	Schnelle Zugriffszeiten: Die Operationen add(), remove(), und contains() haben in der Regel konstante Zeit (O(1)).
+	•	Ungeordnete Sammlung: Die Reihenfolge der Elemente ist nicht garantiert und kann sich ändern.
+	•	Null-Werte erlaubt: Ein einzelnes null-Element ist zulässig.
+
+Beispiel:
+
+import java.util.HashSet;
+
+public class Main {
+    public static void main(String[] args) {
+        HashSet<String> set = new HashSet<>();
+        set.add("Apfel");   // Hinzufügen eines Elements
+        set.add("Banane");
+        set.add("Apfel");   // Wird ignoriert, da "Apfel" bereits enthalten ist
+
+        System.out.println(set.contains("Banane")); // Ausgabe: true
+        System.out.println(set.size());            // Ausgabe: 2
+        set.remove("Apfel");                       // Entfernt "Apfel"
+        System.out.println(set);                   // Ausgabe: [Banane]
+    }
+}
+
+Anwendungsfälle:
+	•	Sicherstellen, dass eine Sammlung keine Duplikate enthält.
+	•	Schnelle Überprüfung, ob ein Element in der Sammlung vorhanden ist.
+
+
+## LinkedHashSet
+
+Ein LinkedHashSet in Java ist eine Implementierung der Set-Schnittstelle, die wie ein HashSet arbeitet,
+jedoch zusätzlich die Einfüge-Reihenfolge der Elemente beibehält.
+Es kombiniert die Eigenschaften eines HashSet (schnelle Zugriffszeiten) mit einer doppelt verketteten Liste, um die Reihenfolge zu speichern.
+
+Eigenschaften von LinkedHashSet
+	1.	Eindeutige Elemente: Keine Duplikate erlaubt.
+	2.	Reihenfolge bleibt erhalten: Speichert die Reihenfolge, in der Elemente hinzugefügt wurden.
+	3.	Effizient: Operationen wie add(), remove() und contains() haben in der Regel konstante Zeit (O(1)).
+	4.	Erlaubt null: Ein null-Element ist zulässig.
+	5.	Nicht threadsicher: Muss synchronisiert werden, wenn mehrere Threads darauf zugreifen.
+
+Beispiel
+
+import java.util.LinkedHashSet;
+
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<String> set = new LinkedHashSet<>();
+        set.add("Apfel");
+        set.add("Banane");
+        set.add("Apfel"); // Duplikat, wird ignoriert
+        set.add("Orange");
+
+        System.out.println(set); // Ausgabe: [Apfel, Banane, Orange]
+    }
+}
+
+Vergleich zu anderen Sets
+	•	HashSet: Keine Reihenfolge der Elemente.
+	•	TreeSet: Elemente werden in aufsteigender Reihenfolge sortiert.
+	•	LinkedHashSet: Behält die Einfüge-Reihenfolge.
+
+Anwendungsfälle
+	•	Wenn eine Sammlung eindeutiger Elemente benötigt wird und die Reihenfolge wichtig ist (z. B. Konfigurationsdateien, Datenfilter).

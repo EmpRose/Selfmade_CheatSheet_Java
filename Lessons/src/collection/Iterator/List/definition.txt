@@ -1,0 +1,27 @@
+List in Java
+Die List-Schnittstelle gehört zur Java Collection Framework und repräsentiert eine geordnete Sammlung von Elementen.
+Sie erlaubt Duplikate, Null und bietet Zugriff auf Elemente basierend auf ihrer Position (Index).
+
+Eigenschaften:
+	•	Indexbasiert: Zugriff auf Elemente mit get(int index).
+	•	Duplikate erlaubt: Mehrere gleiche Elemente können vorhanden sein.
+	•	Reihenfolge: Elemente werden in der Reihenfolge ihrer Einfügung gespeichert.
+
+Wichtige Implementierungen:
+	•	ArrayList: Schneller Zugriff, aber langsame Einfügungen/Löschungen.
+	•	LinkedList: Langsamer Zugriff, aber effizientes Einfügen/Löschen.
+
+Beispiel:
+
+import java.util.*;
+
+public class ListExample {
+    public static void main(String[] args) {
+        List<String> list = new ArrayList<>();
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Cherry");
+
+        System.out.println(list.get(1)); // Zugriff auf das zweite Element
+    }
+}

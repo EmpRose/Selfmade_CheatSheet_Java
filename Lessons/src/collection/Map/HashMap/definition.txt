@@ -1,0 +1,26 @@
+Eine HashMap in Java ist eine Implementierung der Map-Schnittstelle, die eine Schlüssel-Wert-Speicherung ermöglicht.
+Sie verwendet einen Hashing-Mechanismus, um Daten effizient zu speichern und darauf zuzugreifen.
+Die Schlüssel in einer HashMap sind eindeutig, während Werte dupliziert sein können.
+
+Eigenschaften von HashMap:
+	•	Ungesicherte Datenstruktur: Nicht threadsicher, es sei denn, sie wird manuell synchronisiert.
+	•	Schnelle Zugriffszeiten: Konstante Zeit für put() und get() in den meisten Fällen (O(1)).
+	•	Null-Werte erlaubt: Ein null-Schlüssel und mehrere null-Werte sind zulässig.
+	•	Keine feste Reihenfolge: Die Reihenfolge der Einträge ist nicht garantiert.
+
+Beispiel:
+
+import java.util.HashMap;
+
+public class Main {
+    public static void main(String[] args) {
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("Apfel", 3);  // Hinzufügen eines Schlüssel-Wert-Paares
+        map.put("Banane", 5);
+        map.put("Apfel", 7);  // Überschreibt den Wert für "Apfel"
+
+        System.out.println(map.get("Apfel")); // Ausgabe: 7
+        System.out.println(map.containsKey("Banane")); // Ausgabe: true
+        System.out.println(map.size()); // Ausgabe: 2
+    }
+}

@@ -1,0 +1,15 @@
+Wildcards:
+Wildcards (?) in Generics ermöglichen es, unbekannte Typen zu repräsentieren.
+Sie bieten Flexibilität, indem sie Einschränkungen für den Typ-Parameter definieren, ohne den genauen Typ anzugeben.
+Es gibt drei Hauptvarianten:
+	1.	Unbounded Wildcard (?): Beliebiger Typ.
+	2.	Upper-Bounded Wildcard (? extends Type): Typ oder Subtypen.
+	3.	Lower-Bounded Wildcard (? super Type): Typ oder Supertypen.
+
+Beispiel:
+
+List<?> list = new ArrayList<String>(); // Unbounded
+List<? extends Number> numbers = new ArrayList<Integer>(); // Upper-Bounded
+    - erlaubt Lesen (nur sicher für Number) aber kein Hinzufügen
+List<? super Integer> ints = new ArrayList<Number>(); // Lower-Bounded
+    - erlaubt Hinzufügen sicherer Typen

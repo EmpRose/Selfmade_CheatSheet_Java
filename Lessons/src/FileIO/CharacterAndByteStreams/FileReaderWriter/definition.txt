@@ -1,0 +1,41 @@
+FileWriter in Java – Dokumentation
+
+Der FileWriter in Java ist eine Klasse aus dem Paket java.io, die zur schreibenden Verarbeitung von Textdateien verwendet wird.
+Er gehört zur Familie der Character Streams und ermöglicht das Schreiben von Zeichen in Dateien unter Berücksichtigung der Zeichencodierung.
+
+Merkmale von FileWriter
+	1.	Zeichenbasierte Ausgabe:
+Der FileWriter arbeitet mit 16-Bit-Unicode-Zeichen, wodurch er sich ideal für Textdateien eignet. Er kann verschiedene Zeichensätze verwenden,
+z. B. UTF-8 oder ISO-8859-1.
+	2.	Automatische Dateierstellung:
+Falls die angegebene Datei nicht existiert, erstellt der FileWriter sie automatisch.
+	3.	Überschreiben oder Anhängen von Daten:
+Der FileWriter kann so konfiguriert werden, dass er eine Datei entweder überschreibt oder neue Inhalte an eine bestehende Datei anhängt.
+	4.	Pufferung:
+Der FileWriter schreibt Zeichen direkt in die Datei, bietet jedoch keine integrierte Pufferung. Für eine effizientere
+Schreibperformance kann er mit einem BufferedWriter kombiniert werden.
+	5.	Fehlerbehandlung:
+Beim Schreiben können verschiedene I/O-Fehler auftreten (z. B. fehlende Schreibrechte oder Speicherplatzprobleme),
+die mit einer IOException behandelt werden müssen.
+
+Anwendungsfälle
+	•	Speichern von Textdaten in Dateien, z. B. Protokolldateien oder Konfigurationsdateien.
+	•	Export von benutzerfreundlichen Textformaten wie .txt, .csv oder .json.
+	•	Schreiben von Daten in mehreren Schritten, z. B. das kontinuierliche Protokollieren von Ereignissen.
+	•	Verarbeitung von mehrsprachigem Text, da FileWriter Unicode unterstützt.
+
+Wichtige Punkte zur Nutzung
+	•	Zeichencodierung beachten:
+Standardmäßig verwendet der FileWriter die Plattformstandard-Codierung, was zu Problemen führen kann,
+wenn ein bestimmtes Encoding erforderlich ist. Für bessere Kontrolle sollte stattdessen OutputStreamWriter mit einer
+spezifischen Codierung verwendet werden.
+	•	Ressourcenmanagement:
+Der FileWriter sollte nach der Verwendung mit der close()-Methode geschlossen oder mit einem try-with-resources Block verwendet werden,
+um Speicherlecks zu vermeiden.
+	•	Leistungsoptimierung:
+Beim Schreiben großer Textmengen sollte ein BufferedWriter genutzt werden, um die Schreibgeschwindigkeit zu verbessern.
+
+Zusammenfassung
+
+Der FileWriter ist eine einfache und effiziente Lösung zum Schreiben von Textdateien in Java. Er bietet grundlegende Schreibfunktionen,
+eignet sich für kleinere bis mittelgroße Textverarbeitungsszenarien und kann mit zusätzlichen Klassen für eine bessere Leistung kombiniert werden.

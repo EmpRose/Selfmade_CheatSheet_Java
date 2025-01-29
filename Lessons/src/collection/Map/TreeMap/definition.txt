@@ -1,0 +1,18 @@
+Elemente vom collection.Map.TreeMap, sind wie beim HashMap, Paare von Key/Value.
+Die Elemente im collection.Map.TreeMap sind aufsteigend sortiert abgespeichert.
+Die Speichermethode unterscheidet sich von HashMap.
+
+#In den Grundlagen von collection.Map.TreeMap, liegt der "Rot-Schwarze-Baum", (Beim BinärBaum zum Beispiel, darf jedes Element nur 2 Erben haben)
+#Der Rot-Schwarze Baum, "wächst" in eine Richtung // Selbstbalanciert
+#Wenn der Baum zu lang "wächst", erfolgt automatisch die Sortierung, wo die Wurzel aus dem Mittelwert entsteht O(logN)
+- das ermöglicht es collection.Map.TreeMap, schnell aber nicht schneller als HashMap O(1) zu arbeiten.
+
+Die Werte im collection.Map.TreeMap können nicht unique sein, dafür aber die Schlüßel
+Bei gleichen Keys, wird das vorherige Element (falls vorhanden) überschrieben
+
+# Keys = unique (wie bei HashMap)
+
+Die Hauptnutzung vom collection.Map.TreeMap besteht darin "range"s herauszufinden (Abschnitte)
+
+
+

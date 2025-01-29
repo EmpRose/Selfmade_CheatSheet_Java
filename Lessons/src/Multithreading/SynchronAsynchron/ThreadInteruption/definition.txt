@@ -1,0 +1,71 @@
+Thread Interruption in Java
+
+Thread Interruption ist eine Möglichkeit, einen laufenden Thread zu signalisieren, dass er seine Arbeit beenden
+oder eine bestimmte Aktion abbrechen sollte. Es handelt sich dabei um eine “freundliche Anfrage”, da die Unterbrechung nicht erzwingt,
+dass der Thread stoppt, sondern dem Thread überlässt, wie er auf das Signal reagiert.
+
+Wichtige Punkte:
+	1.	interrupt() Methode:
+	•	Wird verwendet, um einen Thread zu unterbrechen.
+	•	Der Thread kann durch Abfragen seines Unterbrechungsstatus oder durch Behandeln einer InterruptedException darauf reagieren.
+	2.	Interruption Status:
+	•	Jeder Thread besitzt einen Unterbrechungsstatus.
+	•	Wird interrupt() aufgerufen, wird der Status auf “unterbrochen” gesetzt.
+	•	Methoden wie Thread.sleep(), wait(), oder join() werfen eine InterruptedException, wenn der Thread unterbrochen wird.
+	3.	Abfrage des Interruption-Status:
+	•	Thread.interrupted(): Überprüft und setzt den Unterbrechungsstatus zurück.
+	•	isInterrupted(): Überprüft, ohne den Status zurückzusetzen.
+	4.	Verhalten bei Unterbrechung:
+Der Thread muss explizit darauf programmiert sein, auf eine Unterbrechung zu reagieren. Ein Thread, der dauerhaft rechnet
+und nicht auf den Unterbrechungsstatus prüft, wird nicht angehalten.
+
+Beispiel:
+
+Hier ein Beispiel, wie ein Thread unterbrochen wird und darauf reagiert:
+
+public class ThreadInterruptionExample {
+    public static void main(String[] args) {
+        Thread thread = new Thread(() -> {
+            try {
+                for (int i = 1; i <= 10; i++) {
+                    System.out.println("Task " + i);
+                    Thread.sleep(500); // Simulation einer zeitaufwändigen Operation
+                }
+            } catch (InterruptedException e) {
+                System.out.println("Thread interrupted while sleeping!");
+                return; // Thread beenden
+            }
+
+            System.out.println("Thread completed without interruption.");
+        });
+
+        thread.start();
+
+        try {
+            Thread.sleep(2000); // Hauptthread wartet 2 Sekunden
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        thread.interrupt(); // Unterbrechen des Threads
+        System.out.println("Main thread sent interrupt signal.");
+    }
+}
+
+Erklärung:
+	1.	Der Thread führt eine Schleife mit Thread.sleep() aus.
+	2.	Nach 2 Sekunden sendet der Hauptthread das interrupt()-Signal.
+	3.	Die Methode Thread.sleep() löst eine InterruptedException aus, und der Thread reagiert darauf, indem er abbricht.
+
+Ausgabe:
+
+Task 1
+Task 2
+Task 3
+Thread interrupted while sleeping!
+Main thread sent interrupt signal.
+
+Zusammenfassung:
+	•	Thread-Unterbrechung ist ein kooperativer Mechanismus: Der Thread entscheidet, wie er auf die Unterbrechung reagiert.
+	•	Sie eignet sich ideal, um lange laufende oder blockierende Operationen freundlich abzubrechen.
+	•	Threads müssen so programmiert werden, dass sie regelmäßig den Unterbrechungsstatus prüfen oder Ausnahmen abfangen.

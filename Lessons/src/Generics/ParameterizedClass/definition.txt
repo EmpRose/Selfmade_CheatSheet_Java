@@ -1,0 +1,25 @@
+Eine parametrisierte Klasse in Java ist eine Klasse, die generische Typen verwendet, um mit verschiedenen Datentypen zu arbeiten.
+Der Datentyp wird beim Erstellen eines Objekts der Klasse spezifiziert. Dies ermöglicht eine flexible, wiederverwendbare Code-Struktur,
+ohne auf spezifische Typen festgelegt zu sein.
+
+
+
+Beispiel:
+
+class Box<T> {
+    private T value;
+
+    public void setValue(T value) {
+        this.value = value;
+    }
+
+    public T getValue() {
+        return value;
+    }
+}
+
+Box<Integer> intBox = new Box<>();
+intBox.setValue(123);
+System.out.println(intBox.getValue()); // Ausgabe: 123
+
+In diesem Beispiel ist Box<T> eine parametrisierte Klasse, bei der T als Platzhalter für einen beliebigen Datentyp dient.

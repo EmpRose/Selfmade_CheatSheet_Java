@@ -1,0 +1,31 @@
+collection.HashTable ist eine veraltete Klasse, die nach dem selben Prinzip wie HashMap arbeitet.
+Allerdings ist collection.HashTable "synchronized", deshalb auch nicht so schnell wie HashMap. (Kann deshalb im Multichannel eingesetzt werden).
+Für das Multichannel empfiehlt es sich jedoch eher die ConcurrentHashMap zu nutzen.
+
+# Key und Value dürfen nicht "null" sein.
+
+Eine HashTable in Java ist eine datenstrukturierte Implementierung der Map-Schnittstelle, die Schlüssel-Wert-Paare speichert.
+Sie ähnelt der HashMap, ist jedoch synchronisiert und daher threadsicher, aber langsamer.
+
+Eigenschaften:
+	1.	Synchronisiert: Geeignet für Multithreading-Umgebungen.
+	2.	Keine null-Werte: Weder Schlüssel noch Werte dürfen null sein.
+	3.	Veralteter Ersatz: Wird oft durch ConcurrentHashMap oder HashMap ersetzt.
+
+Beispiel:
+
+import java.util.Hashtable;
+
+public class Main {
+    public static void main(String[] args) {
+        Hashtable<Integer, String> table = new Hashtable<>();
+        table.put(1, "Eins");
+        table.put(2, "Zwei");
+
+        System.out.println(table.get(1)); // Ausgabe: Eins
+    }
+}
+
+Fazit:
+	•	Veraltet, aber immer noch nützlich für einfache, threadsichere Anwendungen.
+	•	Besserer Ersatz: Verwende ConcurrentHashMap für moderne Multithreading-Anforderungen.

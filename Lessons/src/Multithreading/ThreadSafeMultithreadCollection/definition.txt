@@ -1,0 +1,31 @@
+Multithread Collections in Java – Kurze Zusammenfassung
+
+Nicht-synchronisierte Kollektionen:
+
+Synchronized durch das Wrappen möglich (Collections.synchronizedXYZ(collection)
+Erfolgt durch "Lock" auf den "Monitor", dabei leidet die Performance
+	•	ArrayList
+	•	LinkedList
+	•	HashSet
+	•	TreeSet
+	•	HashMap
+	•	TreeMap
+	•	LinkedHashMap
+
+Synchronisierte Kollektionen:
+
+	•	Vector
+	•	Stack
+	•	Hashtable
+	•	Methoden von Collections.synchronizedList(), synchronizedSet(), synchronizedMap()
+	•	ConcurrentHashMap
+	•	ConcurrentLinkedQueue
+	•	CopyOnWriteArrayList
+	•	CopyOnWriteArraySet
+
+Wesentliche Unterschiede:
+	•	Synchronisierte Kollektionen bieten Thread-Sicherheit, nicht-synchronisierte nicht.
+	•	Nicht-synchronisierte sind schneller, da sie keinen Overhead durch Synchronisation haben.
+	•	Synchronisierte Kollektionen nutzen interne Sperrmechanismen, um Datenkonsistenz zu gewährleisten.
+	•	Concurrent-Kollektionen bieten eine bessere Skalierbarkeit und nutzen feinere Synchronisationsmechanismen wie segmentierte Sperren.
+	•	Nicht-synchronisierte Kollektionen erfordern manuelle Synchronisation für sicheren Zugriff in Multithreading-Umgebungen.

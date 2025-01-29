@@ -1,0 +1,20 @@
+In Java ist ein Consumer ein funktionales Interface aus der java.util.function-Bibliothek.
+Es repräsentiert eine Operation, die einen Eingabewert akzeptiert, aber keinen Rückgabewert liefert.
+Das Interface wird oft in Kombination mit Lambdas oder Method-Referenzen verwendet.
+
+Signatur
+
+@FunctionalInterface
+public interface Consumer<T> {
+    void accept(T t);
+}
+
+Eigenschaften
+	•	Es ist generisch und akzeptiert einen Eingabetyp <T>.
+	•	Enthält eine abstrakte Methode accept(T t), die die gewünschte Operation ausführt.
+	•	Kann mit der Default-Methode andThen kombiniert werden, um mehrere Consumer-Operationen zu verketten.
+
+Verwendung
+
+Ein Consumer ist besonders nützlich, um Code zu kapseln, der eine Operation auf einem Eingabewert ausführt, ohne etwas zurückzugeben,
+ wie z. B. das Drucken eines Werts oder das Ändern eines Objekts.

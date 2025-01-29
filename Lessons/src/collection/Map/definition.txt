@@ -1,0 +1,92 @@
+Die HashMap Elemente bestehen aus einem Paar "Key/Wert".
+HashMap speichert nicht die Reihenfolge ab, in der die Elemente hinzugefügt worden.
+Die Methoden von HashMap arbeiten sehr schnell.
+
+
+Methoden equals und hashcode:
+Wenn "equals" überarbeitet wird, sollte auch "hashcode" überarbeitet werden.
+Collectionen nutzen cash für die Suche und den Vergleich
+Der Vergleich erfolgt erst in hashCode und darauf in equals - weil es mit hashCode sehr viel schneller geht!
+
+Bei selbst erstellten Klassen , müssen wir selbstständig equals und hashCode überarbeiten
+In bestehenden Klassen wie "String" ist alles bereits organisiert
+
+Wenn verschiedene Elemente den selben hashCode Wert zurückgeben, nennt man es eine Kollision
+Je weniger Kollisionen, um so besser
+
+
+Das Ergebnis mehrerer hashCode Aufrufe muss identisch sein beim selben Objekt/Element
+
+Wenn die Objekte/Elemente mit "equals" identisch sind, müssen die mit "hashCode" ebenfalls identisch sein
+Wenn die Objekte/Elemente mit "equals" nicht identisch sind, darf der hashCode identisch sein, denn
+der hashcode gibt einen Integer Wert zurück und dieser ist limitiert
+
+In Java wird der hash in ein Integer umgewandelt (HashCode) - für jedes Element/Objekt unique
+(Node -> Entry)
+
+
+
+
+
+
+
+
+
+Kurze Definition von HashMap:
+Auf dem Grund von HashMap liegt ein Array. Die Elemente dieses Arrays sind Strukturen einer LinkedList.
+Die Daten aus der LinkedList, sind die Elemente die einer HashMap hinzugefügt werden.
+
+Map <Student,Double> collection.Map = new HashMap<>();
+Es wird ein Array (Table) erstellt mit der Größe von 16?
+Jedes Element unseres Arrays, kann mehrere Keys/Werte Paare enthalten.
+Damit jedes Element des Arrays mehrere Paare enthalten kann, werden diese Paare in eine LinkedList hinzugefügt.
+
+
+Die LinkedList-Elemente werden häufig "Bucket" genannt. Jedes Element Enthält Paarwerte "Key/Wert"
+_________________________________________________________________________________________________________________
+|LinkedList|LinkedList|LinkedList|LinkedList|LinkedList|LinkedList|LinkedList|LinkedList||LL|LL|LL|LL|LL|LL|LL|LL|
+
+collection.Map.put(st1,7.5)    hashCode == 356 = Index == 3
+collection.Map.put(st2,6.2) == hc(Key) = 185 == index 7
+collection.Map.put(st3,9.3) == hc(Key) = 562 == index 7
+collection.Map.put(st4,7.2) == hc(Key) = 185 == index 7
+
+Ist "Key" == null
+Wenn ja - erfolgt der Eintrag am Element "0"
+
+
+
+Wenn der hashCode übereinstimmt, stimmt auch der Index
+
+_________________________________________________________________________________________________________________
+|LinkedList|LinkedList|LinkedList|LinkedList|LinkedList|LinkedList|LinkedList|LinkedList||LL|LL|LL|LL|LL|LL|LL|LL|
+_________________________________________________________________________________________________________________
+                       |Node: Index 3                             |Node: Index 7
+                       |hc356                                     |hc 185
+                       |st1                                       |st2
+                       |7.5                                       |6.2
+                       |Next == null (keine weiteren Objekte)     |Next == nächstes Element
+
+                       |                                          |Node: Index 7
+                       |                                          |hc 562
+                       |                                          |st3
+                       |                                          |9.3
+                       |Next == null                              |Next == nächstes Element
+
+                       |                                          |Node: Index 7
+                       |                                          |hc 185
+                       |                                          |st4
+                       |                                          |7.2
+                       |Next == null                              |Next == null
+
+collection.Map.put(st5,7.5)    hashCode == 356 = Index == 3 -> Überschreibt st1 , da der hc und der Index übereinstimmen.
+Die Suche und Kontrolle erfolgen erst in der Abfrage des hc und darauf, wenn diese übereinstimmen über "equals".
+
+
+# Bei der Deklaration von "HashMap" können zwei Werte übergeben werden.
+Initial capacity : Anfangsgröße des Arrays
+Load factor : Der Punkt, wann die Größe des Arrays verdoppelt wird
+
+# HashMap reguliert die Verteilung selbstständig, um nicht alle Elemente in ein Node zu speichern und eine einzelne riesige Linked List zu erstellen
+# Als Key ist es wichtig ein "imutable"Objekt zu nutzen (nicht veränderbar) (final Objekte/Elemente)
+

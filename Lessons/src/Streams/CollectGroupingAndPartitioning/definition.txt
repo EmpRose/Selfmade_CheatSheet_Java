@@ -1,0 +1,17 @@
+groupingBy
+
+Die Methode groupingBy gruppiert Elemente eines Streams basierend auf einem Gruppierungsschlüssel und speichert die Gruppen in einer Map.
+	•	Schlüssel: Ein Merkmal, nach dem die Elemente gruppiert werden (z. B. ein Attribut wie course).
+	•	Werte: Eine Liste aller Elemente, die zu dieser Gruppe gehören.
+
+Beispiel: Studenten werden basierend auf ihrem Studiengang gruppiert. Das Ergebnis ist eine Map,
+          bei der der Schlüssel der Studiengang und der Wert die Liste der Studenten ist.
+
+partitioningBy
+
+Die Methode partitioningBy teilt Elemente eines Streams basierend auf einer Prädikatsbedingung in zwei Gruppen und speichert diese in einer Map.
+	•	Schlüssel: Ein Boolean (true oder false), der angibt, ob ein Element die Bedingung erfüllt.
+	•	Werte: Listen von Elementen, die entweder die Bedingung erfüllen (true) oder nicht (false).
+
+Beispiel: Studenten werden in zwei Gruppen unterteilt, je nachdem, ob ihre Durchschnittsnote größer als 7 ist oder nicht.
+          Das Ergebnis ist eine Map mit zwei Einträgen: einer Liste für true und einer für false.

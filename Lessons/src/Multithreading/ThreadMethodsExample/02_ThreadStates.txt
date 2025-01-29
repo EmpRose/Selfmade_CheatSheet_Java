@@ -1,0 +1,21 @@
+Zustände (States) von Threads in Java
+
+Ein Thread in Java kann sich zu einem bestimmten Zeitpunkt in einem der folgenden Zustände befinden:
+
+	•	NEW:
+Der Thread wurde erstellt, aber seine start()-Methode wurde noch nicht aufgerufen.
+
+	•	RUNNABLE:
+Der Thread wurde gestartet und ist bereit, ausgeführt zu werden. Die tatsächliche Ausführung hängt vom Scheduler ab.
+
+	•	BLOCKED:
+Der Thread wartet darauf, einen Monitor (Sperre) zu erhalten, um eine synchronisierte Methode oder einen synchronisierten Block auszuführen.
+
+	•	WAITING:
+Der Thread wartet auf ein Signal oder eine Benachrichtigung von einem anderen Thread mittels Methoden wie wait() oder join(), ohne eine Zeitbegrenzung.
+
+	•	TIMED_WAITING:
+Ähnlich wie WAITING, aber mit einer festgelegten Wartezeit. Methoden wie sleep(long millis) oder join(long millis) führen zu diesem Zustand.
+
+	•	TERMINATED:
+Der Thread hat seine Ausführung abgeschlossen und kann nicht erneut gestartet werden.

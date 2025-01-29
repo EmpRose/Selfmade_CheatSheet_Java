@@ -1,0 +1,10 @@
+Type Erasure:
+In Java wird Generics-Information während der Kompilierung entfernt, um die Kompatibilität mit älterem Code (Java 1.4 und früher) sicherzustellen.
+Während der Laufzeit arbeiten generische Klassen und Methoden mit ihren “raw types”, d. h.,
+der generische Typ wird durch Object oder den angegebenen Bound ersetzt.
+
+List<String> list = new ArrayList<>();
+list.add("Hello");
+// Nach Type Erasure wird es effektiv:
+List list = new ArrayList();
+list.add((Object) "Hello");

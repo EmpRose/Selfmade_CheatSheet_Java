@@ -1,0 +1,17 @@
+ConcurrentHashMap ist eine threadsichere Implementierung von Map, die gleichzeitige Lese- und Schreibzugriffe durch mehrere Threads ermöglicht,
+ohne dass eine explizite Synchronisierung erforderlich ist.
+
+Wichtige Merkmale:
+	•	Ermöglicht hohe Performance, da sie interne Segmentierung nutzt (feinkörnige Sperren).
+	•	Mehrere Threads können parallel lesen und teilweise schreiben, ohne sich gegenseitig zu blockieren.
+	•	Verwendet Bucket-Level-Sperren (statt einer globalen Sperre), wodurch Skalierbarkeit verbessert wird.
+	•	Null-Werte und Null-Schlüssel sind nicht erlaubt, im Gegensatz zu HashMap.
+	•	Methoden wie putIfAbsent(), compute() und merge() bieten atomare Operationen für Thread-Sicherheit.
+
+Wann verwenden?
+	•	Wenn mehrere Threads häufig auf eine gemeinsame Map zugreifen.
+	•	Wenn Lesezugriffe dominieren, aber gelegentliche Schreiboperationen auftreten.
+	•	In hochgradig parallelen Anwendungen wie Caching, Thread-Pools oder Zählern.
+
+Alternative:
+	•	Verwende Collections.synchronizedMap() für kleinere oder weniger parallele Anwendungsfälle.

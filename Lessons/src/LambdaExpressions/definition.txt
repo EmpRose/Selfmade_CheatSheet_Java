@@ -1,0 +1,124 @@
+#################################################################
+
+Lambda arbeitet mit Interfaces, die nur eine abstrakte Methode haben.(funktionales Interface)
+Die Methode kann keine oder mehrere Parameter empfangen und verarbeiten
+Es ist auch möglich, neue Variablen innerhalb der {} eines Lambda Ausdruckes zu erstellen oder bestehende zu verändern.
+
+
+
+Beispiele:
+void testStudents(ArrayList<Student> al, StudentChecks sc){
+        for (Student s : al) {
+            if(sc.check(s)){
+                System.out.println(s);
+            }
+        }
+    }
+
+interface StudentChecks{
+    boolean check(Student s);
+}
+                            // Interface erwartet "Student x"
+info.testStudents(students , (Student s) -> {return s.age<30;});
+info.testStudents(students,(Student s) -> {return s.name!="";});
+#################################################################
+public class Test2 {
+    static void def(I i){
+        System.out.println(i.abc("privet"));
+    }
+
+    public static void main(String[] args) {
+       def((String str) -> {return str.length();});
+    }
+}
+
+interface I{
+    int abc(String s);
+}
+#################################################################
+Die kürzeste Variante für Lambdas:
+(students, stud -> stud.avgGrade > 8.5)
+
+Die vollständigere Variante Lambdas: In diesem Fall , ist es möglich den Typ des Parameters anzugeben. Dazu immer in () Schreiben.
+(students , (Student stud) -> {return stud.avgGrade > 8.5};);
+
+Der Pfeil, trennt die Methodenparameter und den Methodenkörper.
+In einem Lambda Ausdruck, ist der Ausdruck rechts vom Operator "Pfeil" ->
+Der Methodenkörper, der in der sonst bestehenden Klasse die das Interface implementiert hätte müssen.
+
+Wenn das Interface mehrere Argumente enthält, müssen die übergebenen Parameter in Klammern übergeben werden:
+interface StudentChecks{
+    boolean check(Student s, int i);
+    }
+
+Wenn das Interface mehrere Argumente empfangen kann, so müssen wir mehrere Parameter übergeben. Dabei ist die nutzung aller nicht notwendig.
+info.testStudents(students, (s,i) -> s.avgGrade > 8);
+#################################################################
+Abstrakte Interface-Methode:
+Interface I {
+    int abc();
+}
+
+def(() -> 18);
+
+
+
+
+
+#Lambda-Ausdrücke in Java – Kurze Dokumentation
+
+1. Einführung
+
+Lambda-Ausdrücke, eingeführt in Java 8, bieten eine kompakte Möglichkeit, anonyme Funktionen zu definieren und zu verwenden.
+Sie ermöglichen eine funktionale Programmierung und verbessern die Lesbarkeit und Wartbarkeit des Codes.
+Lambda-Ausdrücke sind besonders nützlich mit der neuen Stream-API und funktionalen Schnittstellen.
+
+2. Syntax
+
+Die allgemeine Syntax eines Lambda-Ausdrucks lautet:
+
+(parameter1, parameter2, ...) -> expression
+
+Beispiel:
+
+// Lambda-Ausdruck ohne Parameter
+Runnable r = () -> System.out.println("Hallo, Lambda!");
+r.run();
+
+3. Beispiele
+	•	Mit einem Parameter:
+
+Consumer<String> printMessage = message -> System.out.println(message);
+printMessage.accept("Hallo!");
+
+	•	Mit mehreren Parametern:
+
+BinaryOperator<Integer> add = (a, b) -> a + b;
+System.out.println(add.apply(5, 3)); // Gibt 8 aus
+
+4. Verwendung mit Streams
+
+Lambda-Ausdrücke eignen sich hervorragend für die Verwendung mit der Stream-API:
+
+List<String> names = Arrays.asList("Anna", "Bob", "Charlie");
+names.Klassen()
+     .filter(name -> name.startsWith("A"))
+     .forEach(name -> System.out.println(name));
+
+5. Funktionale Schnittstellen
+
+Lambda-Ausdrücke arbeiten mit funktionalen Schnittstellen, die genau eine abstrakte Methode haben, z.B.:
+	•	Predicate<T>: Gibt true oder false zurück.
+	•	Function<T, R>: Wandelt einen Wert vom Typ T in einen Wert vom Typ R.
+	•	Consumer<T>: Verarbeitet einen Wert, gibt aber nichts zurück.
+
+Beispiel:
+
+Predicate<Integer> isEven = num -> num % 2 == 0;
+System.out.println(isEven.test(4)); // Gibt true aus
+
+6. Vorteile
+	•	Kompakter Code: Reduziert Boilerplate-Code, besonders bei der Arbeit mit anonymen Klassen.
+	•	Lesbarkeit: Fördert einen funktionalen und deklarativen Stil.
+	•	Streams: Lambda-Ausdrücke integrieren sich hervorragend in Streams und ermöglichen eine effiziente Datenverarbeitung.
+

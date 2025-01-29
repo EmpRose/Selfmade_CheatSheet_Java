@@ -1,0 +1,90 @@
+Was ist ein Monitor in Java?
+-Jede/s Object und Klasse in Java verfügt über einen Monitor
+-Verfügt über Statuswert : Frei oder Beschäftigt
+
+Ein Monitor ist ein Synchronisationsmechanismus, der den Zugriff auf gemeinsam genutzte Ressourcen in einem Multithreading-Umfeld steuert.
+In Java wird das Konzept eines Monitors durch die synchronized-Schlüsselwörter und die Objektsperren (Locks) realisiert.
+
+Wie funktioniert ein Monitor?
+	1.	Jedes Java-Objekt besitzt einen Monitor (Lock):
+Jedes Objekt in Java hat eine integrierte Sperre, die verwendet wird, um synchronisierten Zugriff zu steuern.
+	2.	Exklusiver Zugriff:
+Wenn ein Thread eine synchronisierte Methode oder einen synchronisierten Block betritt, erlangt er die Sperre (Monitor) des Objekts.
+Andere Threads müssen warten, bis der Monitor freigegeben wird.
+	3.	Synchronisierung auf Objektebene:
+Der Zugriff auf den Monitor erfolgt über das Schlüsselwort synchronized, entweder für Methoden oder für Codeblöcke.
+
+Monitor-Mechanismen in Java
+	1.	Synchronisierte Methoden:
+	•	Der gesamte Methodenblock ist synchronisiert.
+	•	Der Monitor wird für das Objekt gesperrt, wenn es sich um eine Instanzmethode handelt, oder für die Klasse bei einer statischen Methode.
+
+public synchronized void method() {
+    // Codeblock, der nur von einem Thread gleichzeitig ausgeführt werden kann
+}
+
+
+	2.	Synchronisierte Blöcke:
+	•	Nur ein bestimmter Codeblock wird synchronisiert, was feinkörniger und effizienter ist.
+	•	Der Monitor wird auf das angegebene Objekt angewendet.
+
+public void method() {
+    synchronized (this) {
+        // Kritischer Bereich
+    }
+}
+
+
+	3.	wait(), notify(), notifyAll():
+	•	Diese Methoden gehören zur Klasse Object und werden verwendet, um Threads in einem Monitor zu steuern.
+	•	Ein Thread kann mithilfe von wait() pausieren, bis er von einem anderen Thread mit notify() oder notifyAll() aufgeweckt wird.
+	•	Sie müssen innerhalb eines synchronisierten Blocks oder einer Methode aufgerufen werden, da sie den Monitor des Objekts verwenden.
+
+synchronized (lockObject) {
+    lockObject.wait();  // Warten auf Benachrichtigung
+    lockObject.notify();  // Einen wartenden Thread aufwecken
+}
+
+Beispiel für einen Monitor in Java
+
+class SharedResource {
+    private int value = 0;
+
+    public synchronized void increment() {
+        value++;
+        System.out.println(Thread.currentThread().getName() + " incremented to: " + value);
+    }
+
+    public synchronized int getValue() {
+        return value;
+    }
+}
+
+public class MonitorExample {
+    public static void main(String[] args) {
+        SharedResource resource = new SharedResource();
+
+        Runnable task = () -> {
+            for (int i = 0; i < 5; i++) {
+                resource.increment();
+            }
+        };
+
+        Thread t1 = new Thread(task, "Thread-1");
+        Thread t2 = new Thread(task, "Thread-2");
+
+        t1.start();
+        t2.start();
+    }
+}
+
+Erklärung:
+	•	SharedResource nutzt einen Monitor (Sperre), um sicherzustellen, dass increment() und getValue()
+	    nur von einem Thread gleichzeitig ausgeführt werden.
+	•	Der Monitor verhindert ein Data Race durch exklusive Sperrung des kritischen Bereichs.
+
+Zusammenfassung
+	•	Ein Monitor ist ein Mechanismus für Thread-Synchronisierung in Java.
+	•	Er sorgt dafür, dass nur ein Thread gleichzeitig auf einen kritischen Bereich zugreifen kann.
+	•	Implementiert durch das Schlüsselwort synchronized.
+	•	Die Methoden wait(), notify(), notifyAll() bieten zusätzliche Kontrollmöglichkeiten innerhalb eines Monitors.

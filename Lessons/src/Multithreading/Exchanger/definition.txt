@@ -1,0 +1,103 @@
+In Java wird die Klasse Exchanger<T> aus dem Paket java.util.concurrent verwendet, um Daten zwischen zwei Threads auszutauschen. Die Hauptidee hinter einem Exchanger ist, dass zwei Threads jeweils ein Objekt an den anderen übergeben und gleichzeitig ein Objekt zurückerhalten. Dies ist besonders nützlich, wenn Threads aufeinander angewiesen sind, um ihre Daten zu verarbeiten oder zu synchronisieren.
+
+Funktionsweise von Exchanger
+
+Ein Exchanger funktioniert nach einem einfachen Prinzip:
+	1.	Ein Thread ruft die Methode exchange() auf und übergibt ein Objekt.
+	2.	Der aufrufende Thread blockiert, bis ein anderer Thread ebenfalls exchange() aufruft und ein eigenes Objekt bereitstellt.
+	3.	Sobald beide Threads bereit sind, tauschen sie ihre Objekte aus und setzen die Ausführung fort.
+
+Falls ein Thread allein exchange() aufruft, blockiert er, bis ein passender Partner gefunden wird.
+
+Verwendung von Exchanger
+
+Ein einfaches Beispiel zeigt, wie zwei Threads Daten austauschen können:
+
+import java.util.concurrent.Exchanger;
+
+public class ExchangerExample {
+    public static void main(String[] args) {
+        Exchanger<String> exchanger = new Exchanger<>();
+
+        Thread thread1 = new Thread(() -> {
+            try {
+                String dataToSend = "Daten von Thread 1";
+                System.out.println("Thread 1 sendet: " + dataToSend);
+                String receivedData = exchanger.exchange(dataToSend);
+                System.out.println("Thread 1 erhielt: " + receivedData);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        Thread thread2 = new Thread(() -> {
+            try {
+                String dataToSend = "Daten von Thread 2";
+                System.out.println("Thread 2 sendet: " + dataToSend);
+                String receivedData = exchanger.exchange(dataToSend);
+                System.out.println("Thread 2 erhielt: " + receivedData);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        thread1.start();
+        thread2.start();
+    }
+}
+
+In diesem Beispiel sendet Thread 1 eine Nachricht an Thread 2, während Thread 2 ebenfalls eine Nachricht an Thread 1 sendet. Die beiden Threads tauschen die Daten erfolgreich aus und setzen ihre Arbeit fort.
+
+Ausgabe (ungefähre Reihenfolge):
+
+Thread 1 sendet: Daten von Thread 1
+Thread 2 sendet: Daten von Thread 2
+Thread 1 erhielt: Daten von Thread 2
+Thread 2 erhielt: Daten von Thread 1
+
+Typische Anwendungsfälle für Exchanger
+	•	Datenverarbeitung in Stufen: Ein Thread erzeugt Daten, und ein anderer verarbeitet sie weiter.
+	•	Protokollierung: Ein Thread sammelt Protokolle, während ein anderer sie speichert oder sendet.
+	•	Parallelisierung von Algorithmen: Zwei Threads berechnen unterschiedliche Teile eines Problems und tauschen Teilergebnisse aus.
+	•	Pufferverwaltung: Threads können Datenblöcke austauschen, z. B. beim Lesen und Schreiben von Dateien.
+
+Besonderheiten und Verhalten von Exchanger
+	1.	Blockierendes Verhalten: Ein Thread blockiert beim Aufruf von exchange(), bis ein zweiter Thread ebenfalls bereit ist.
+	2.	Timeout-Funktion: Mit der Methode exchange(value, timeout, TimeUnit) kann eine maximale Wartezeit angegeben werden, um Deadlocks zu vermeiden.
+	3.	Einmaliger Austausch: Jeder Austausch erfolgt genau einmal, danach müssen die Threads erneut exchange() aufrufen, um neue Daten auszutauschen.
+	4.	Synchronisation zwischen zwei Threads: Exchanger funktioniert nur für genau zwei Threads, weitere Threads müssen warten oder separate Exchanger-Instanzen verwenden.
+
+Erweitertes Beispiel mit Timeout:
+
+import java.util.concurrent.Exchanger;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
+public class ExchangerTimeoutExample {
+    public static void main(String[] args) {
+        Exchanger<String> exchanger = new Exchanger<>();
+
+        Thread thread1 = new Thread(() -> {
+            try {
+                System.out.println("Thread 1 wartet auf Austausch...");
+                String receivedData = exchanger.exchange("Thread 1 Daten", 3, TimeUnit.SECONDS);
+                System.out.println("Thread 1 erhielt: " + receivedData);
+            } catch (InterruptedException | TimeoutException e) {
+                System.out.println("Thread 1 hat einen Timeout erhalten.");
+            }
+        });
+
+        thread1.start();
+    }
+}
+
+In diesem Beispiel wird Thread 1 nach drei Sekunden eine TimeoutException erhalten, falls kein anderer Thread verfügbar ist, um Daten auszutauschen.
+
+Zusammenfassung
+	•	Exchanger ermöglicht den direkten Datenaustausch zwischen zwei Threads.
+	•	Ein Thread blockiert, bis der Austauschpartner bereit ist.
+	•	Ein exchange()-Aufruf kann optional mit einem Timeout versehen werden.
+	•	Er eignet sich hervorragend für Synchronisationsaufgaben, bei denen zwei Threads aufeinander angewiesen sind.
+	•	Hauptanwendungsfälle sind Datenverarbeitung in Stufen, Pufferverwaltung und parallele Algorithmen.
+
+Diese Klasse bietet eine elegante Möglichkeit, Threads auf sichere Weise miteinander kommunizieren zu lassen, ohne auf komplexere Synchronisationsmechanismen wie Locks oder Queues zurückzugreifen.

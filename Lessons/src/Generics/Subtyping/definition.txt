@@ -1,0 +1,12 @@
+Subtyping:
+Subtyping in Java bedeutet, dass ein generischer Typ mit unterschiedlichen Typ-Parametern nicht als verwandte Typen betrachtet wird,
+selbst wenn ihre Typ-Parameter eine Vererbungshierarchie aufweisen. Das führt dazu, dass z. B. List<String> kein Subtyp von List<Object> ist.
+
+Beispiel:
+
+List<Object> listObj;
+List<String> listStr = new ArrayList<>();
+// Nicht erlaubt:
+listObj = listStr; // Compiler-Fehler
+
+Das verhindert Typ-Sicherheitsprobleme.

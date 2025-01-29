@@ -1,0 +1,17 @@
+Thread Pool:
+Ein Thread Pool ist eine Sammlung von wiederverwendbaren Threads, die für die parallele Ausführung von Aufgaben verwendet werden.
+Es minimiert den Overhead, da Threads nicht jedes Mal neu erstellt und zerstört werden müssen.
+
+ExecutorService:
+Der ExecutorService ist eine Schnittstelle in Java, die die Verwaltung von Thread Pools erleichtert.
+Sie bietet Methoden zur asynchronen Ausführung von Aufgaben (z. B. submit()), zur Steuerung des Thread Pools und zum kontrollierten Herunterfahren.
+
+Vorteile:
+	•	Effiziente Ressourcennutzung durch Wiederverwendung von Threads.
+	•	Bessere Steuerung von Threads (z. B. Begrenzung der Anzahl paralleler Threads).
+	•	Erhöhte Code-Lesbarkeit und Wartbarkeit durch abstrahierte Thread-Verwaltung.
+
+Typische Implementierungen:
+	•	FixedThreadPool: Feste Anzahl von Threads.
+	•	CachedThreadPool: Dynamische Thread-Anpassung basierend auf Bedarf.
+	•	ScheduledThreadPool: Threads für geplante oder wiederholte Aufgaben.

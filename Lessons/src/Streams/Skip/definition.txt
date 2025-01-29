@@ -1,0 +1,21 @@
+skip
+
+Die Methode skip wird verwendet, um eine bestimmte Anzahl von Elementen am Anfang eines Streams zu überspringen.
+
+Eigenschaften von skip:
+	1.	Überspringen von Elementen:
+	•	Gibt einen Stream zurück, der alle Elemente ab dem (n+1)-ten Element enthält.
+	•	Wenn der Stream weniger als n Elemente hat, ist das Ergebnis ein leerer Stream.
+	2.	Sequentielle Verarbeitung:
+	•	Die Reihenfolge der Elemente bleibt erhalten, wenn der Stream geordnet ist.
+	3.	Kombinierbar:
+	•	Häufig in Kombination mit limit, um bestimmte Bereiche eines Streams auszuwählen (z. B. Pagination).
+
+Wann wird skip verwendet?
+	•	Wenn du die ersten n Elemente eines Streams nicht benötigst.
+	•	Anwendungsfälle:
+	•	Überspringen von Kopfzeilen oder initialen Einträgen in Daten.
+	•	Implementierung von Paging, indem du beispielsweise skip(pageSize * pageNumber) verwendest.
+
+Hinweis:
+	•	In einem parallelen Stream kann die Performance variieren, da die Methode auf einer festen Reihenfolge basiert.

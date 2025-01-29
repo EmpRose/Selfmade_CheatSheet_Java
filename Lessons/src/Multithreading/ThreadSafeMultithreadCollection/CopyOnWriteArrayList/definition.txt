@@ -1,0 +1,15 @@
+CopyOnWriteArrayList ist eine threadsichere Variante von ArrayList, die eine Kopie der Liste erstellt,
+wenn Änderungen vorgenommen werden. Dadurch können Leseoperationen ohne Sperren erfolgen, während Schreiboperationen eine neue Kopie der Liste erzeugen.
+
+Wichtige Merkmale:
+	•	Thread-Sicherheit: Mehrere Threads können gleichzeitig lesen, ohne blockiert zu werden.
+	•	Kopiermechanismus: Bei jeder Änderung (z. B. add(), set(), remove()) wird eine neue Kopie der gesamten Liste erstellt.
+	•	Konsistenz: Leseoperationen sehen immer eine konsistente Ansicht der Liste, auch wenn parallel Änderungen erfolgen.
+	•	Null-Werte sind erlaubt, im Gegensatz zu ConcurrentHashMap.
+
+Wann verwenden?
+	•	Bei häufigen Leseoperationen und seltenen Änderungen.
+	•	In Multi-Thread-Umgebungen, wo hohe Lesegeschwindigkeit erforderlich ist.
+	•	Für Event-Listener, Konfigurationsdaten oder Caching, wo Änderungen selten sind.
+
+Nachteil: Schreiboperationen sind teurer, da sie die gesamte Liste duplizieren.

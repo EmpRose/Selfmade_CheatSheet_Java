@@ -1,0 +1,63 @@
+In Java wird die Klasse CountDownLatch aus dem Paket java.util.concurrent verwendet, um einen oder mehrere Threads so lange warten zu lassen, bis eine bestimmte Anzahl von Ereignissen oder Aufgaben abgeschlossen ist. Dies ist besonders nützlich für Szenarien, in denen ein Thread auf das Beenden mehrerer anderer Threads warten muss, bevor er fortfahren kann.
+
+Ein CountDownLatch wird mit einer anfänglichen Anzahl von Zählern (Latch-Wert) erstellt. Jeder abgeschlossene Thread oder Task ruft die Methode countDown() auf, um den Zähler zu reduzieren. Der Hauptthread kann die Methode await() verwenden, um zu blockieren, bis der Zähler auf null reduziert wurde, wodurch signalisiert wird, dass alle erwarteten Tasks abgeschlossen sind.
+
+Wichtige Methoden von CountDownLatch
+
+Die Methode await() blockiert den aufrufenden Thread, bis der Zähler des Latches auf null reduziert wird. Es gibt auch eine überladene Version mit einem Timeout, um zu verhindern, dass der Thread unendlich wartet.
+
+Die Methode countDown() reduziert den Zähler um eins. Sobald der Zähler null erreicht, werden alle wartenden Threads freigegeben.
+
+Die Methode getCount() gibt den aktuellen Wert des Zählers zurück, was hilfreich für Debugging-Zwecke ist.
+
+Verwendung von CountDownLatch
+
+Ein einfaches Beispiel zur Demonstration:
+
+import java.util.concurrent.CountDownLatch;
+
+public class CountDownLatchExample {
+    public static void main(String[] args) {
+        CountDownLatch latch = new CountDownLatch(3);
+
+        Runnable worker = () -> {
+            System.out.println(Thread.currentThread().getName() + " arbeitet...");
+            try {
+                Thread.sleep(2000);
+                System.out.println(Thread.currentThread().getName() + " beendet Arbeit.");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                latch.countDown();  // Reduziert den Zähler
+            }
+        };
+
+        for (int i = 0; i < 3; i++) {
+            new Thread(worker).start();
+        }
+
+        try {
+            System.out.println("Warte auf den Abschluss aller Tasks...");
+            latch.await();  // Blockiert, bis countDown() dreimal aufgerufen wurde
+            System.out.println("Alle Tasks sind abgeschlossen. Weiter geht's!");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+In diesem Beispiel starten drei Threads und arbeiten für zwei Sekunden. Der Hauptthread ruft latch.await() auf und wartet, bis alle drei Threads den Zähler durch countDown() auf null reduziert haben. Danach fährt das Programm fort.
+
+Wichtige Punkte zu CountDownLatch
+	1.	Ein CountDownLatch kann nicht zurückgesetzt werden. Nachdem der Zähler null erreicht hat, bleibt er dort. Wenn erneutes Warten erforderlich ist, muss ein neues CountDownLatch-Objekt erstellt werden.
+	2.	Der await()-Aufruf ist blockierend, bis alle erwarteten Tasks abgeschlossen sind.
+	3.	Mehrere Threads können den await()-Aufruf gleichzeitig durchführen, wodurch alle gleichzeitig freigegeben werden, sobald der Zähler null ist.
+	4.	Es wird häufig für Synchronisationszwecke verwendet, z. B. beim Starten eines Services erst nach dem Abschluss mehrerer Initialisierungstasks.
+
+Zusammenfassung
+	•	CountDownLatch hilft dabei, die Synchronisation zwischen mehreren Threads zu koordinieren.
+	•	Der Hauptthread wartet mit await(), während andere Threads durch countDown() den Fortschritt signalisieren.
+	•	Sobald der Zähler null erreicht, setzen alle wartenden Threads ihre Ausführung fort.
+	•	Es kann nicht erneut verwendet werden, nachdem es auf null reduziert wurde.
+
+Diese Klasse ist besonders nützlich für parallele Verarbeitungsaufgaben, Testvorbereitungen und Szenarien, in denen Abhängigkeiten zwischen verschiedenen Prozessen bestehen.

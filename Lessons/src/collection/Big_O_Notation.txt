@@ -1,0 +1,10 @@
+Big O Notation:
+Big O beschreibt die Effizienz eines Algorithmus hinsichtlich seiner Laufzeit oder seines Speicherverbrauchs in Abhängigkeit von der Eingabemenge ￼.
+Es gibt die Wachstumsrate an und klassifiziert Algorithmen nach ihrer Skalierbarkeit (z. B. ￼O(1),O(n),O(log n),O(n2).
+
+Beispiel:
+	•	O(1): Konstante Zeit, unabhängig von ￼n.
+	•	O(n): Lineare Zeit, direkt proportional zu n￼.
+	•	O(n2): Quadratische Zeit, geeignet für kleinere Eingabemengen.
+
+Big O fokussiert auf das Verhalten bei großen n￼.

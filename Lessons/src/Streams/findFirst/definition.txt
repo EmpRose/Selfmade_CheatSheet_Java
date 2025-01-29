@@ -1,0 +1,17 @@
+findFirst()
+
+Die Methode findFirst() wird in Streams verwendet, um das erste Element des Streams zu finden und zurückzugeben.
+
+Wichtige Eigenschaften:
+	•	Gibt ein Optional zurück, das entweder das erste Element enthält oder leer ist, wenn der Stream keine Elemente hat.
+	•	Die Reihenfolge des Streams beeinflusst das Ergebnis:
+	•	Sequentieller Stream: Gibt immer das erste Element basierend auf der ursprünglichen Reihenfolge zurück.
+	•	Paralleler Stream: Behält ebenfalls die Reihenfolge bei und liefert das erste Element.
+
+Wann wird findFirst verwendet?
+	•	Wenn du nur das erste Element eines Streams benötigst.
+	•	Wenn du sicherstellen möchtest, dass das Element ausgehend von der Reihenfolge (z. B. einer Liste) ausgewählt wird.
+
+Wichtiger Hinweis:
+	•	Bei ungeordneten Streams oder Streams, bei denen die Reihenfolge keine Rolle spielt,
+	    kann findAny() effizienter sein, da es keine Garantie für die Reihenfolge gibt.

@@ -1,0 +1,36 @@
+Multithreading in Java ermöglicht die gleichzeitige Ausführung mehrerer Threads innerhalb eines Programms.
+	•	Thread: Ein leichtgewichtiger Prozess, der unabhängig läuft.
+	•	Ermöglicht die parallele Ausführung von Aufgaben, wie Datenverarbeitung und Benutzerinteraktion.
+	•	Unterstützt durch die Klassen Thread und Runnable sowie das Executor-Framework.
+	•	Vorteile: Bessere Ressourcenausnutzung, höhere Effizienz bei Multi-Core-Prozessoren.
+	•	Herausforderungen: Threadsicherheit und Synchronisation.
+
+	-Aufrufen:
+
+	-Option 1: durch Vererbung einer Klasse.
+	Erstellen:
+	    class MyThread extends Thread{ public void run() { code }}
+	Ausführen:
+	    MyThread thread = new MyThread();
+	    thread.start();
+	  oder:
+	    new MyThread().start();
+
+	-Option 2: durch Implementierung eines Interfaces.
+	Erstellen:
+	    class MyThread implements Runnable{ public void run() { code }}
+	Ausführen:
+	    Thread thread = new Thread (MyThread);
+	    thread.start();
+	-Option 3: durch anonyme Klasse.
+	    new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        System.out.println("Hi, there!");
+                    }
+                }).start();
+    -Option 4: durch einen Lambda Ausdruck.
+        new Thread(()-> System.out.println("Hi, there!"));
+
+    -Hinweis!: Bei den Optionen 3 und 4, ist es wichtig .start() nicht zu vergessen!
+    -Hinweis!: Da eine Mehrfachvererbung in Java nicht existiert, wird die erste Option seltener genutzt.

@@ -1,0 +1,37 @@
+parallelStream
+
+Die Methode parallelStream wird verwendet, um einen Parallel Stream zu erstellen, der die Verarbeitung von Elementen auf mehrere Threads verteilt.
+Sie ermöglicht eine parallele Verarbeitung für größere Datenmengen und komplexe Aufgaben.
+
+Eigenschaften von parallelStream:
+	1.	Parallelisierung:
+	•	Teilt den Stream in mehrere Teilstücke auf, die auf verschiedenen Threads verarbeitet werden.
+	•	Nutzt intern das Fork/Join-Framework.
+	2.	Reihenfolge der Verarbeitung:
+	•	Die Reihenfolge bleibt erhalten, wenn die Quelle geordnet ist.
+	•	Ungeordnete Streams können jedoch effizienter verarbeitet werden.
+	3.	Automatisches Thread-Management:
+	•	Die Parallelisierung erfolgt automatisch ohne explizite Thread-Verwaltung durch den Entwickler.
+	4.	Effizienz:
+	•	Ideal für große Datenmengen oder CPU-intensive Operationen.
+	•	Kann Overhead erzeugen und ist für kleine Datensätze nicht immer vorteilhaft.
+
+Wie wird ein Parallel Stream erstellt?
+	1.	Aus einer Collection:
+	•	Mit collection.parallelStream() direkt aus einer Collection wie List, Set, etc.
+	2.	Aus einem regulären Stream:
+	•	Mit .parallel() wird ein regulärer Stream in einen Parallel Stream umgewandelt.
+
+Wann verwenden?
+	•	Für rechenintensive Aufgaben oder große Datensätze.
+	•	Beispiele:
+	•	Verarbeitung großer Listen (z. B. Filtern, Mapping, Aggregation).
+	•	Aufgaben, die unabhängig voneinander bearbeitet werden können (z. B. Statistikberechnungen).
+
+Hinweise zur Vorsicht:
+	1.	Threadsicherheit:
+	•	Vermeide mutable Datenstrukturen, die von mehreren Threads gleichzeitig verändert werden können.
+	2.	I/O-intensive Operationen:
+	•	Parallel Streams bringen bei I/O-lastigen Aufgaben (z. B. Lesen von Dateien, Netzwerkzugriffe) keinen großen Vorteil.
+	3.	Kleine Datensätze:
+	•	Für kleine Datenmengen kann der Parallelisierungs-Overhead die Leistung verschlechtern.

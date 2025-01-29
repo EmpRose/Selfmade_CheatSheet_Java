@@ -1,0 +1,66 @@
+Stream- eine reihenfolge von Elementen, die reihenfolgende oder parallele Operationen unterstützt.
+    - Stream Methoden, verändern die Werte der Datenlieferanten NICHT.
+    - Der beste Ort für den Einsatz von Lambdaausdrücken
+
+Source (z.Bsp. Array) -> Streamerzeugung -> Intermediate methods (lazy) -> Terminal method (eager)
+            : lazy Methoden werden erst nach aufruf von der eager Methode ausgeführt.
+
+
+    	1.	collection.Map()
+    	•	Verwendet, um jedes Element eines Streams in ein anderes Element zu transformieren.
+    	•	Gibt einen neuen Stream zurück.
+    	•	Beispiel: Daten umwandeln (z. B. String in Integer).
+    	•	Syntax: stream.collection.Map(element -> transformation);
+
+        	2.	filter()
+        	•	Verwendet, um Elemente basierend auf einer Bedingung auszuwählen.
+        	•	Gibt nur die Elemente zurück, die die Bedingung erfüllen.
+        	•	Beispiel: Zahlen filtern, die größer als 10 sind.
+        	•	Syntax: stream.filter(element -> condition);
+
+        	        3. forEach()
+        	        •	Führt eine Aktion für jedes Element im Stream aus.
+                	•	Wird oft für das Debuggen oder das Ausführen von Nebenwirkungen verwendet.
+                	•	Gibt keinen neuen Stream zurück.
+                	•	Beispiel: Werte auf der Konsole ausgeben.
+                	•	Syntax:stream.forEach(element -> action);
+
+        4. reduce()
+        •   Die Methode .reduce() wird verwendet, um die Elemente eines Streams auf einen einzigen Wert zu reduzieren,
+            indem eine Akkumulationsfunktion angewendet wird.
+        •	Einsatz: Summieren, Multiplizieren oder Kombinieren von Werten.
+        •	Parameter: Eine Initialwertoption und eine BinaryOperator-Funktion.
+        •	Syntax: List<Integer> numbers = List.of(1, 2, 3, 4);
+                    int sum = numbers.stream()
+                                     .reduce(0, Integer::sum); // Ergebnis: 10
+
+
+Methoden von Streams:
+Stream-Methoden in Java – Übersicht
+
+Erzeugung von Streams:
+	•	stream():           Stream aus Collection oder Array.
+	•	of():               Stream aus festen Werten.
+	•	generate():         Stream mit benutzerdefinierter Logik.
+	•	iterate():          Stream durch Iteration erstellen.
+
+Zwischenoperationen (Intermediate Operations):
+	•	filter(Predicate):  Elemente filtern.
+	•	map(Function):      Elemente transformieren.
+	•	flatMap(Function):  Elemente in flache Streams auflösen.
+	•	distinct():         Doppelte entfernen.
+	•	sorted():           Elemente sortieren.
+	•	limit(long):        Anzahl der Elemente beschränken.
+	•	skip(long):         Erste n Elemente überspringen.
+
+Terminale Operationen:
+	•	forEach(Consumer):  Aktion für jedes Element ausführen.
+	•	toArray():          Stream in Array umwandeln.
+	•	reduce(BinaryOperator): Elemente zu einem Wert zusammenfassen.
+	•	collect(Collector): Ergebnisse in eine Collection sammeln.
+	•	count():            Anzahl der Elemente zählen.
+	•	anyMatch(Predicate), allMatch(Predicate), noneMatch(Predicate): Bedingungen prüfen.
+	•	findFirst(), findAny(): Erstes/beliebiges Element finden.
+
+Spezielle Streams:
+	•	IntStream, LongStream, DoubleStream: Streams für primitive Datentypen.

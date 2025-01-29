@@ -1,0 +1,43 @@
+Stack in Java
+
+Ein Stack ist eine Datenstruktur, die das LIFO-Prinzip (Last In, First Out) verwendet.
+Das bedeutet, dass das zuletzt hinzugefügte Element zuerst entfernt wird.
+In Java ist Stack eine Klasse im Paket java.util und erweitert die Klasse Vector.
+
+Wichtige Methoden:
+	•	push(E item): Fügt ein Element oben auf den Stack hinzu.
+	•	pop(): Entfernt und gibt das oberste Element des Stacks zurück.
+	•	peek(): Gibt das oberste Element zurück, ohne es zu entfernen.
+	•	isEmpty(): Überprüft, ob der Stack leer ist.
+	•	search(Object o): Gibt die 1-basierte Position des Elements im Stack zurück (oder -1, wenn es nicht gefunden wird).
+
+Beispiel:
+
+import java.util.Stack;
+
+public class StackExample {
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
+
+        // Elemente hinzufügen
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
+
+        // Oberstes Element ansehen
+        System.out.println("Peek: " + stack.peek()); // 30
+
+        // Element entfernen
+        System.out.println("Pop: " + stack.pop());  // 30
+
+        // Stack prüfen
+        System.out.println("Ist der Stack leer? " + stack.isEmpty()); // false
+
+        // Restliche Elemente
+        System.out.println(stack); // [10, 20]
+    }
+}
+
+Eigenschaften:
+	•	Verwendet die Klasse Vector als Grundlage, daher ist es synchronisiert.
+	•	Wird oft in Szenarien wie rekursiven Berechnungen, Undo-Funktionen, Klammer-Validierungen oder Backtracking eingesetzt.

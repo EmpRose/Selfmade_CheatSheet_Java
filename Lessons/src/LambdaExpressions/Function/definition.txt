@@ -1,0 +1,35 @@
+Package: java.util.function
+
+Eine Lambda-Funktion in Java ist eine prägnante Möglichkeit, eine anonyme Implementierung eines funktionalen Interfaces zu schreiben.
+Lambda-Ausdrücke wurden mit Java 8 eingeführt und sind besonders nützlich, um kurze Codeblöcke zu definieren, die bestimmte Aufgaben ausführen.
+
+Syntax
+
+(parameters) -> expression
+// oder
+(parameters) -> { statements; }
+
+Beispiel: Lambda-Funktion
+
+Angenommen, wir arbeiten mit dem funktionalen Interface Function<T, R>:
+
+@FunctionalInterface
+public interface Function<T, R> {
+    R apply(T t);
+}
+
+Eine Lambda-Funktion könnte so aussehen:
+
+Function<Integer, String> intToString = (i) -> "Zahl: " + i;
+
+Eigenschaften
+	•	Kompakte Syntax: Keine Notwendigkeit, eine separate Klasse oder anonyme Klasse zu erstellen.
+	•	Typinferenz: Der Compiler erkennt automatisch die Typen der Parameter basierend auf dem Kontext.
+	•	Flexible Verwendung: Kann überall dort verwendet werden, wo ein funktionales Interface erwartet wird.
+
+Vorteile
+	•	Reduziert Boilerplate-Code.
+	•	Macht den Code lesbarer und funktionaler.
+
+Einschränkungen
+	•	Kann nur mit funktionalen Interfaces verwendet werden (Interfaces mit genau einer abstrakten Methode).

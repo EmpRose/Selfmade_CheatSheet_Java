@@ -1,0 +1,96 @@
+HashMap -> LinkedHashMap
+
+Eine LinkedHashMap in Java ist eine Implementierung der Map-Schnittstelle, die wie eine HashMap arbeitet,
+jedoch die Einträge in der Reihenfolge speichert, in der sie hinzugefügt wurden (Einfüge-Reihenfolge) oder wahlweise in der Zugriffs-Reihenfolge.
+Sie wird intern mit einer doppelt verketteten Liste kombiniert, um diese Ordnung zu gewährleisten.
+
+Eigenschaften von LinkedHashMap
+	1.	Einfache Speicherung: Speichert Schlüssel-Wert-Paare, ähnlich wie HashMap.
+	2.	Erhalt der Reihenfolge:
+	•	Standardmäßig: Reihenfolge, in der die Einträge hinzugefügt wurden (Einfüge-Reihenfolge).
+	•	Optional: Zugriffs-Reihenfolge (wenn ein Eintrag durch get() oder put() aufgerufen wird).
+	3.	Effizienz:
+	•	Konstante Zeitkomplexität für put() und get() (O(1)).
+	4.	Ermöglicht null-Werte: Erlaubt einen null-Schlüssel und mehrere null-Werte.
+	5.	Nicht threadsicher: Sollte bei mehreren Threads manuell synchronisiert werden.
+
+Konstruktoren
+	1.	Standard-Konstruktor:
+
+LinkedHashMap<K, V> map = new LinkedHashMap<>();
+
+
+	2.	Mit Zugriff-Reihenfolge:
+
+LinkedHashMap<K, V> map = new LinkedHashMap<>(initialCapacity, loadFactor, accessOrder);
+// accessOrder = true für Zugriffs-Reihenfolge
+
+Beispiel: Einfüge-Reihenfolge
+
+import java.util.LinkedHashMap;
+
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
+        map.put(1, "Eins");
+        map.put(2, "Zwei");
+        map.put(3, "Drei");
+
+        System.out.println(map); // Ausgabe: {1=Eins, 2=Zwei, 3=Drei}
+    }
+}
+
+Beispiel: Zugriffs-Reihenfolge
+
+import java.util.LinkedHashMap;
+
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashMap<Integer, String> map = new LinkedHashMap<>(16, 0.75f, true);
+        map.put(1, "Eins");
+        map.put(2, "Zwei");
+        map.put(3, "Drei");
+
+        map.get(1); // Zugriff auf Schlüssel 1
+        System.out.println(map); // Ausgabe: {2=Zwei, 3=Drei, 1=Eins}
+    }
+}
+
+Anwendungsfälle
+	•	Wann immer die Einfüge-Reihenfolge der Einträge wichtig ist (z. B. für Cache-Systeme).
+	•	Implementierung von LRU-Caches (Least Recently Used), indem die Zugriffs-Reihenfolge genutzt wird.
+
+LRU-Cache-Beispiel
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+public class LRUCache<K, V> extends LinkedHashMap<K, V> {
+    private final int capacity;
+
+    public LRUCache(int capacity) {
+        super(capacity, 0.75f, true); // true für Zugriffs-Reihenfolge
+        this.capacity = capacity;
+    }
+
+    @Override
+    protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
+        return size() > capacity; // Entfernt das älteste Element, wenn die Kapazität überschritten wird
+    }
+
+    public static void main(String[] args) {
+        LRUCache<Integer, String> cache = new LRUCache<>(3);
+        cache.put(1, "A");
+        cache.put(2, "B");
+        cache.put(3, "C");
+        cache.get(1); // Zugriff auf 1
+        cache.put(4, "D"); // Ältestes Element (2) wird entfernt
+
+        System.out.println(cache); // Ausgabe: {3=C, 1=A, 4=D}
+    }
+}
+
+Zusammenfassung
+
+Eine LinkedHashMap ist ideal, wenn sowohl der schnelle Zugriff (wie bei einer HashMap) als auch
+die Beibehaltung der Einfüge- oder Zugriffs-Reihenfolge wichtig ist.

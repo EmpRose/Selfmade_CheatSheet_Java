@@ -1,0 +1,42 @@
+In Java wird die Klasse Semaphore aus dem Paket java.util.concurrent verwendet, um den gleichzeitigen Zugriff auf Ressourcen durch mehrere Threads zu steuern. Ein Semaphore verwaltet eine feste Anzahl von Berechtigungen (Permits), die Threads erwerben oder freigeben können. Dies ist nützlich, um den Zugriff auf gemeinsam genutzte Ressourcen wie Datenbanken, Dateien oder Netzwerkverbindungen zu begrenzen.
+
+Ein Semaphore wird mit einer bestimmten Anzahl von Permits initialisiert. Ein Thread muss ein Permit anfordern, bevor er auf die geschützte Ressource zugreift, und das Permit nach der Nutzung wieder freigeben. Wenn keine Permits verfügbar sind, blockiert der Thread, bis eines verfügbar wird.
+
+Die wichtigsten Methoden der Semaphore-Klasse sind:
+
+Die Methode acquire() wird verwendet, um ein Permit anzufordern. Wenn kein Permit verfügbar ist, wird der Thread blockiert, bis eines freigegeben wird. Alternativ kann tryAcquire() verwendet werden, um zu überprüfen, ob ein Permit sofort verfügbar ist, ohne zu blockieren.
+
+Die Methode release() gibt ein Permit zurück und ermöglicht es anderen Threads, darauf zuzugreifen. Es ist wichtig, dass jedes erworbene Permit schließlich wieder freigegeben wird, um Deadlocks zu vermeiden.
+
+Ein Semaphore kann entweder fair oder unfair sein. Ein fairer Semaphore gewährt Permits in der Reihenfolge, in der die Anfragen eingehen (FIFO-Prinzip), während ein unfairer Semaphore möglicherweise einen wartenden Thread überspringt, um die Performance zu verbessern. Standardmäßig ist ein Semaphore unfair.
+
+Ein einfaches Beispiel zeigt die Verwendung eines Semaphores zur Steuerung des Zugriffs von mehreren Threads auf eine begrenzte Anzahl von Ressourcen. Ein Semaphore mit drei Permits wird erstellt, und mehrere Threads versuchen, auf die Ressource zuzugreifen.
+
+import java.util.concurrent.Semaphore;
+
+public class SemaphoreExample {
+    public static void main(String[] args) {
+        Semaphore semaphore = new Semaphore(3);
+
+        Runnable task = () -> {
+            try {
+                System.out.println(Thread.currentThread().getName() + " wartet auf Zugriff...");
+                semaphore.acquire();
+                System.out.println(Thread.currentThread().getName() + " hat Zugriff!");
+                Thread.sleep(2000);
+                System.out.println(Thread.currentThread().getName() + " gibt Zugriff frei.");
+                semaphore.release();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        };
+
+        for (int i = 0; i < 5; i++) {
+            new Thread(task).start();
+        }
+    }
+}
+
+In diesem Beispiel starten fünf Threads, aber nur drei können gleichzeitig auf die Ressource zugreifen. Die anderen Threads müssen warten, bis ein Permit durch release() zurückgegeben wird.
+
+Zusammenfassend ist Semaphore ein nützliches Synchronisationswerkzeug in Java, wenn es darum geht, gleichzeitigen Zugriff auf begrenzte Ressourcen effizient zu steuern und Engpässe zu vermeiden.

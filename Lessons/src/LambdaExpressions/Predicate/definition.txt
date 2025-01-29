@@ -1,0 +1,47 @@
+Ein Lambda Predicate ist eine Lambda-Funktion, die das funktionale Interface Predicate<T> implementiert.
+Dieses Interface wird verwendet, um eine Bedingung zu definieren, die auf ein Objekt des Typs T angewendet wird,
+und gibt einen boolean-Wert zurück.
+
+Syntax des Predicate<T>-Interfaces:
+
+@FunctionalInterface
+public interface Predicate<T> {
+    boolean test(T t);
+}
+
+Verwendung mit Lambda:
+
+Ein Lambda-Ausdruck, der einen Predicate<T> implementiert, könnte so aussehen:
+
+Predicate<String> isEmpty = (str) -> str.isEmpty();
+
+Hier prüft der Predicate, ob ein gegebener String leer ist.
+
+Eigenschaften
+	•	Parameter: Nimmt ein Objekt des Typs T als Eingabe.
+	•	Rückgabewert: Gibt true oder false zurück.
+	•	Verwendung: Wird oft in Kombination mit Methoden wie filter() in Streams verwendet.
+
+Kombinieren von Predicates:
+
+Das Predicate-Interface bietet Standardmethoden wie and(), or() und negate() zum Kombinieren von Bedingungen.
+
+Beispiel:
+
+Predicate<Integer> isPositive = (num) -> num > 0;
+Predicate<Integer> isEven = (num) -> num % 2 == 0;
+
+// Kombiniert: Positiv und gerade
+Predicate<Integer> isPositiveAndEven = isPositive.and(isEven);
+
+Anwendungsbeispiel mit Streams:
+
+List<String> names = Arrays.asList("Alice", "", "Bob", "Carol");
+
+List<String> nonEmptyNames = names.stream()
+                                  .filter((name) -> !name.isEmpty())
+                                  .collect(Collectors.toList());
+
+System.out.println(nonEmptyNames); // Ausgabe: [Alice, Bob, Carol]
+
+Ein Lambda Predicate vereinfacht die Arbeit mit Bedingungen und macht den Code prägnant und ausdrucksstark.

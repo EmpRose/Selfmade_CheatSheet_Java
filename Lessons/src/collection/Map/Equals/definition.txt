@@ -1,0 +1,70 @@
+Im Prinzip entspricht die Methode "equals" dem "==" zeichen.
+Objekte werden mit einander verglichen und sind identisch, wenn sie auf das selbe Objekt
+im HashCode verweisen.
+
+In Java spielen die Methoden equals() und hashCode() eine entscheidende Rolle für den Vergleich und das Verhalten von Objekten,
+insbesondere in datenstrukturbezogenen Klassen wie HashMap, HashSet oder HashTable.
+
+equals()
+	•	Die Methode wird verwendet, um zwei Objekte auf Gleichheit zu prüfen.
+	•	Standardmäßig vergleicht die Implementierung in der Klasse Object nur die Speicheradressen der Objekte (==).
+	•	Um eine inhaltliche Gleichheit zu prüfen (z. B. gleiche Werte in einem Objekt), muss equals() überschrieben werden.
+
+Beispiel:
+
+@Override
+public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null || getClass() != obj.getClass()) return false;
+    MyClass myClass = (MyClass) obj;
+    return field1 == myClass.field1 && field2.equals(myClass.field2);
+}
+
+hashCode()
+	•	Die Methode liefert einen Ganzzahlwert, der den Zustand eines Objekts repräsentiert.
+	•	Wird vor allem von Hash-basierten Datenstrukturen (HashMap, HashSet) verwendet, um Elemente effizient abzulegen und abzurufen.
+	•	Wenn equals() überschrieben wird, muss auch hashCode() überschrieben werden, damit Objekte,
+	die als gleich angesehen werden (equals() gibt true zurück), denselben Hashcode haben.
+
+Beispiel:
+
+@Override
+public int hashCode() {
+    return Objects.hash(field1, field2); // Kombiniert die relevanten Felder zu einem Hashcode
+}
+
+Zusammenhang zwischen equals() und hashCode()
+	•	Konsistenzregel: Wenn zwei Objekte durch equals() gleich sind, müssen sie denselben hashCode() haben.
+	•	Ein ungleicher Hashcode bedeutet nicht zwingend, dass equals() false zurückgibt, da Kollisionen möglich sind.
+
+Beispiel für die Implementierung
+
+import java.util.Objects;
+
+public class MyClass {
+    private int id;
+    private String name;
+
+    public MyClass(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        MyClass myClass = (MyClass) obj;
+        return id == myClass.id && Objects.equals(name, myClass.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
+}
+
+Fazit
+	•	equals(): Vergleicht, ob zwei Objekte gleich sind.
+	•	hashCode(): Liefert eine Ganzzahl, die zur Speicherung und Suche verwendet wird.
+	•	Überschreibt man equals(), sollte man immer auch hashCode() überschreiben, um konsistentes Verhalten zu gewährleisten.
